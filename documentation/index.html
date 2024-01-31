@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en" class="default-style docs-page">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>User Guide - HRSALE v2.0.0 Docs</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/bootstrap.css">
+<link rel="stylesheet" href="assets/appwork.css">
+<link rel="stylesheet" href="assets/theme-corporate.css">
+<link rel="stylesheet" href="assets/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/main.js"></script>
+</head>
+<body>
+<h1 class="docs-page-header bg-dark text-white"> <span class="docs-page-header-path">HRSALE v2.0.0</span> </h1>
+<div class="docs-wrapper">
+  <div class="docs-sections bg-light">
+    <ul class="docs-sections-inner">
+      <li><a href="#sources-start">0.1 Start </a></li>
+      <li><a href="#sources-requirements">0.2 Requirements </a></li>
+      <li><a href="#sources-installation">0.3 Installation Instructions </a></li>
+      <li><a href="#page-structure-generator">0.4 Theme Generator </a></li>
+      <li><a href="#migration-guides">0.5 Migration guide</a></li>
+      <li><a href="#customer-support">0.6 Customer Support</a></li>
+      <li><a href="#product-customization">0.7 Product Customization</a></li>
+    </ul>
+  </div>
+  <div class="docs-inner">
+    <h4 class="docs-header docs-header-anchor"><a name="sources-start">HRSALE</a></h4>
+    <div class="docs-block">
+      <p> Thank you for purchasing the HR SALE script. If you have any questions that are beyond the scope of this help file, please feel free to email via our user page contact form or contact us directly using below email address. Thank you so much! </p>
+      <p> If you face any kind of problem during installation phase of HRSALE - Do Not Worry - We are here to help you!! Contact us directly at below information </p>
+      <p> E-mail Address:	hrsalesoft@gmail.com </p>
+    </div>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="sources-requirements">Requirements</a></h4>
+    <div class="docs-block">
+      <ol>
+    <li>
+      <p>PHP version 7.0.0 or higher</p>
+      <ul>
+        <li>
+          <p><code>PDO</code> PHP Extension</p>
+        </li>
+        <li>
+          <p><code>OpenSSL</code> PHP Extension</p>
+        </li>
+        <li>
+          <p><code>Mbstring</code> PHP Extension</p>
+        </li>
+        <li>
+          <p><code>Tokenizer</code> PHP Extension</p>
+        </li>
+        <li>
+          <p><code>JSON</code> PHP Extension</p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><code>MySQL</code> 5.x or higher</p>
+    </li>
+    <li>
+      <p><code>Nginx</code> or <code>Apache</code> (recommended http server)</p>
+    </li>
+  </ol>
+    </div>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="sources-installation">Installation Instructions</a></h4>
+    <h5>For Live server</h5>
+    <div class="docs-block">
+      <ul class="mt-3">
+        <li>Unzip the downloaded folder</li>
+        <li>Create a subfolder on your host via FTP or File Manager (You can name the folder <code>"hrm"</code> for-example)</li>
+        <li>Upload the files from the <code>"hrsale_2_0_0"</code> folder of the script into the newly created subfolder on your host</li>
+        <li>Create a MySQL database (Your hosting provider can assist)</li>
+        <li>Visit your website where you uploaded the files, For example: <code>http://hrm.example.com/install/</code></li>
+        <li>The Installation Wizard will open automatically, just follow the steps</li>
+      </ul>
+    </div>
+    <div class="alert alert-warning">
+      <p> <i class="fa fa-info"></i> In most hosting accounts these extensions are enabled by
+        default. But you
+        should check with your hosting provider. </p>
+    </div>
+    <hr/>
+    <h5>For Local server - WampServer, XAMPP, MAMP</h5>
+    <div class="docs-block">
+      <ul class="mt-3">
+        <li>Unzip the downloaded folder</li>
+        <li>Create a folder in wampserver, xampp or mamp server (You can name the folder <code>"hrm"</code> for-example)</li>
+        <li>Upload the files from the <code>"hrsale_2_0_0"</code> folder of the script into the newly created folder</li>
+        <li>Create a MySQL database. Go to <code>http://localhost/phpmyadmin/</code> or <code>http://127.0.0.1/phpmyadmin/</code></li>
+        <li>Visit your website where you uploaded the files, For example: <code>http://localhost/hrm/install/</code></li>
+        <li>The Installation Wizard will open automatically, just follow the steps</li>
+      </ul>
+    </div>
+    <h5>Step 1</h5>
+    <div class="docs-block"> <img src="assets/img/installation_step1.png" width="500" height="500"> </div>
+    <h5>Step 2</h5>
+    <div class="docs-block"> <img src="assets/img/installation_step2.png" width="500" height="500"> </div>
+    <h5>Step 3</h5>
+    <div class="docs-block"> <img src="assets/img/installation_step3.png" width="500" height="500"> </div>
+    <h5>Step 4 - Finish</h5>
+    <div class="docs-block"> <img src="assets/img/installation_step4.png" width="500" height="500"> </div>
+    <div class="alert alert-success" role="alert"> After successful login you will redirected to the login page. </div>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="page-structure-generator">Theme Generator <code>for developer</code></a></h4>
+    <p> Just replace a content of appropriate files with the generated code within the <code>view</code> directory. </p>
+    <div class="alert alert-danger" role="alert"> Note: Don't touch the code, if you don't have experience in development.</div>
+    <div class="docs-block">
+      <iframe src="generators/html5-starter-generator.html" frameborder="0" style="width: 100%;height: 600px;"></iframe>
+    </div>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="migration-guides">Migration from v1.1.10 to v2.0.0</a></h4>
+    <div class="docs-block" id="migration">
+      <div class="migration-guide" id="migration-guide-140" data-name="1.1.10 → 2.0.0">
+        <ol>
+          <li>
+            <p>Import update_v1.1.10_to_v2.0.0.sql to your current database.</p>
+          </li>
+          <li>
+            <p>Overwrite the updated files to your current files so you can get the latest updated system. Overwrite folder name is Update 1.1.10 to 2.0.0</p>
+          </li>
+        </ol>
+        <div class="alert alert-danger" role="alert"> Note: The update_v1.1.10_to_v2.0.0.sql files for only already installed database. 
+          So don't need to import this sql file while doing fresh installation.</div>
+        <div class="alert alert-danger" role="alert"> Note: If you customized any file please take backup of that file first. 
+          For customized files you can also contact us so we can help you..</div>
+      </div>
+    </div>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="customer-support">Customer Support</a></h4>
+    <p> All the support related issue should be emailed directly to <code>hrsalesoft@gmail.com</code></p>
+    <p> Support is available from 9:00 AM - 6:00 PM (GMT+3), Monday - Saturday.</p>
+    <p> If you are having any difficulty in understanding the product or you have any question, We encourage you to contact us. Email us at hrsalesoft@gmail.com for fast response. We will be glad to help you.</p>
+    <hr/>
+    <h4 class="docs-header docs-header-anchor"><a name="product-customization">Product Customization</a></h4>
+    <p> HRSALE can be customize depending on your need. Our charges are affordable.</p>
+    <p> We work and charge for customization as $25/hour.</p>
+    <p> A fixed price quote can be generated if you provide all the details of customization.</p>
+    <div class="text-center mt-5 mb-5"><img src="assets/img/hrsale-app-icon.png"></div>
+  </div>
+</div>
+</body>
+</html>

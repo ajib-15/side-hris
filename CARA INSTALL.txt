@@ -1,0 +1,7 @@
+1. Running di php 7 >
+2. setting koneksi database di file config/database.php
+3. buat database dengan nama hris di localhost/phpmyadmin/ 
+4. import database didalam folder database hris.sql 
+4. login pada url http://localhost/hris/admin/
+username : superuser    
+password : super@123
