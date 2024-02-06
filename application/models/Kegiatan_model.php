@@ -144,10 +144,9 @@ class Kegiatan_model extends CI_Model
     return $query->result_array();
   }
 
-  public function add_mata_acara($data)
+  public function add_instrumen($data, $table)
   {
-    $this->db->insert('xin_kegiatan_mata', $data);
-
+    $this->db->insert($table, $data);
     return true;
   }
 }

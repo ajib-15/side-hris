@@ -787,7 +787,7 @@ class Kegiatan extends MY_Controller
       "id_kegiatan" => (int)$id,
       "nama_mata_acara" => $this->input->post('nama_mata_acara')
     );
-    $this->Kegiatan_model->add_mata_acara($data);
+    $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_mata");
 
     return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
   }
@@ -851,9 +851,27 @@ class Kegiatan extends MY_Controller
     return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
   }
 
+  public function add_tujuan($id)
+  {
+    $data = array(
+      "id_kegiatan" => (int)$id,
+      "keterangan" => $this->input->post('keterangan_tujuan')
+    );
+    $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_tujuan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
   public function delete_mata_acara($id_kegiatan, $id_mata)
   {
     $this->Kegiatan_model->delete_instrumen($id_mata, "xin_kegiatan_mata");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
+  }
+
+  public function delete_tujuan($id_kegiatan, $id_tujuan)
+  {
+    $this->Kegiatan_model->delete_instrumen($id_tujuan, "xin_kegiatan_tujuan");
 
     return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
   }
