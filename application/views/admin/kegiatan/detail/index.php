@@ -36,7 +36,7 @@
 
 <div id="catatan" class="collapse add-formd animated fadeUp">
   <div class="ui-bordered px-4 pt-4 mb-4 mt-3">
-    <form action="<?= base_url() ?>admin/kegiatan/add_catatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST" accept-charset="utf-8">
+    <form action="<?= base_url() ?>admin/kegiatan/add_catatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST">
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
       <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
       <div class="my-3 text-right">
@@ -62,7 +62,7 @@
           Print
         </button>
       </a>
-      <a href="<?= base_url() ?>admin/kegiatan/detail_delete/<?= $choosed_kegiatan[0]['id'] ?>" class="text-dark">
+      <a href="<?= base_url() ?>admin/kegiatan/detail_delete/<?= $choosed_kegiatan[0]['id'] ?>" class="text-dark" onclick="return confirm('Are you sure you want to delete?');">
         <button type="button" class="btn btn-md btn-danger">
           <span class="ion ion-ios-trash"></span>
           Hapus

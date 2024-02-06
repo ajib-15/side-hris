@@ -751,7 +751,6 @@ class Kegiatan extends MY_Controller
 
     // Get Kolaborator Kegiatan
     $data["kolaborator"] = $this->Kegiatan_model->get_kolaborator_by_id_kegiatan($id);
-
     return $data;
   }
 
@@ -760,9 +759,103 @@ class Kegiatan extends MY_Controller
     $data = array(
       "catatan" => $this->input->post('catatan_kegiatan')
     );
-    $this->Kegiatan_model->add_catatan($id, $data);
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
 
     return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function detail_delete($id)
+  {
+    $this->Kegiatan_model->delete($id);
+
+    return redirect(base_url() . 'admin/kegiatan');
+  }
+
+  public function update_nama_kegiatan($id)
+  {
+    $data = array(
+      "nama" => $this->input->post('nama_kegiatan')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function add_mata_acara($id)
+  {
+    $data = array(
+      "id_kegiatan" => (int)$id,
+      "nama_mata_acara" => $this->input->post('nama_mata_acara')
+    );
+    $this->Kegiatan_model->add_mata_acara($data);
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_mata_acara($id_kegiatan, $id_mata)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "nama_mata_acara" => $formData['nama_mata_acara'],
+      "strategi_lit" => array_key_exists('strategi_lit', $formData) ? ($formData['strategi_lit'] ? 1 : 0) : 0,
+      "strategi_dis" => array_key_exists('strategi_dis', $formData) ? ($formData['strategi_dis'] ? 1 : 0) : 0,
+      "strategi_ine" => array_key_exists('strategi_ine', $formData) ? ($formData['strategi_ine'] ? 1 : 0) : 0,
+
+      "kelompok_cs" => array_key_exists('kelompok_cs', $formData) ? ($formData['kelompok_cs'] ? 1 : 0) : 0,
+      "kelompok_cr" => array_key_exists('kelompok_cr', $formData) ? ($formData['kelompok_cr'] ? 1 : 0) : 0,
+      "kelompok_cd" => array_key_exists('kelompok_cd', $formData) ? ($formData['kelompok_cd'] ? 1 : 0) : 0,
+      "kelompok_ce" => array_key_exists('kelompok_ce', $formData) ? ($formData['kelompok_ce'] ? 1 : 0) : 0,
+
+      "fokus_edu" => array_key_exists('fokus_edu', $formData) ? ($formData['fokus_edu'] ? 1 : 0) : 0,
+      "fokus_eco" => array_key_exists('fokus_eco', $formData) ? ($formData['fokus_eco'] ? 1 : 0) : 0,
+      "fokus_hql" => array_key_exists('fokus_hql', $formData) ? ($formData['fokus_hql'] ? 1 : 0) : 0,
+      "fokus_ie" => array_key_exists('fokus_ie', $formData) ? ($formData['fokus_ie'] ? 1 : 0) : 0,
+
+      "platform_rg" => array_key_exists('platform_rg', $formData) ? ($formData['platform_rg'] ? 1 : 0) : 0,
+      "platform_dg" => array_key_exists('platform_dg', $formData) ? ($formData['platform_dg'] ? 1 : 0) : 0,
+      "platform_hy" => array_key_exists('platform_hy', $formData) ? ($formData['platform_hy'] ? 1 : 0) : 0,
+
+      "literasi_bt" => array_key_exists('literasi_bt', $formData) ? ($formData['literasi_bt'] ? 1 : 0) : 0,
+      "literasi_nu" => array_key_exists('literasi_nu', $formData) ? ($formData['literasi_nu'] ? 1 : 0) : 0,
+      "literasi_sa" => array_key_exists('literasi_sa', $formData) ? ($formData['literasi_sa'] ? 1 : 0) : 0,
+      "literasi_di" => array_key_exists('literasi_di', $formData) ? ($formData['literasi_di'] ? 1 : 0) : 0,
+      "literasi_fi" => array_key_exists('literasi_fi', $formData) ? ($formData['literasi_fi'] ? 1 : 0) : 0,
+      "literasi_bk" => array_key_exists('literasi_bk', $formData) ? ($formData['literasi_bk'] ? 1 : 0) : 0,
+
+      "inklusivitas_ds" => array_key_exists('inklusivitas_ds', $formData) ? ($formData['inklusivitas_ds'] ? 1 : 0) : 0,
+      "inklusivitas_mr" => array_key_exists('inklusivitas_mr', $formData) ? ($formData['inklusivitas_mr'] ? 1 : 0) : 0,
+      "inklusivitas_gd" => array_key_exists('inklusivitas_gd', $formData) ? ($formData['inklusivitas_gd'] ? 1 : 0) : 0,
+      "inklusivitas_3t" => array_key_exists('inklusivitas_3t', $formData) ? ($formData['inklusivitas_3t'] ? 1 : 0) : 0,
+
+      "sdg_1" => array_key_exists('sdg_1', $formData) ? ($formData['sdg_1'] ? 1 : 0) : 0,
+      "sdg_2" => array_key_exists('sdg_2', $formData) ? ($formData['sdg_2'] ? 1 : 0) : 0,
+      "sdg_3" => array_key_exists('sdg_3', $formData) ? ($formData['sdg_3'] ? 1 : 0) : 0,
+      "sdg_4" => array_key_exists('sdg_4', $formData) ? ($formData['sdg_4'] ? 1 : 0) : 0,
+      "sdg_5" => array_key_exists('sdg_5', $formData) ? ($formData['sdg_5'] ? 1 : 0) : 0,
+      "sdg_6" => array_key_exists('sdg_6', $formData) ? ($formData['sdg_6'] ? 1 : 0) : 0,
+      "sdg_7" => array_key_exists('sdg_7', $formData) ? ($formData['sdg_7'] ? 1 : 0) : 0,
+      "sdg_8" => array_key_exists('sdg_8', $formData) ? ($formData['sdg_8'] ? 1 : 0) : 0,
+      "sdg_9" => array_key_exists('sdg_9', $formData) ? ($formData['sdg_9'] ? 1 : 0) : 0,
+      "sdg_10" => array_key_exists('sdg_10', $formData) ? ($formData['sdg_10'] ? 1 : 0) : 0,
+      "sdg_11" => array_key_exists('sdg_11', $formData) ? ($formData['sdg_11'] ? 1 : 0) : 0,
+      "sdg_12" => array_key_exists('sdg_12', $formData) ? ($formData['sdg_12'] ? 1 : 0) : 0,
+      "sdg_13" => array_key_exists('sdg_13', $formData) ? ($formData['sdg_13'] ? 1 : 0) : 0,
+      "sdg_14" => array_key_exists('sdg_14', $formData) ? ($formData['sdg_14'] ? 1 : 0) : 0,
+      "sdg_15" => array_key_exists('sdg_15', $formData) ? ($formData['sdg_15'] ? 1 : 0) : 0,
+      "sdg_16" => array_key_exists('sdg_16', $formData) ? ($formData['sdg_16'] ? 1 : 0) : 0,
+      "sdg_17" => array_key_exists('sdg_17', $formData) ? ($formData['sdg_17'] ? 1 : 0) : 0,
+    );
+
+    $this->Kegiatan_model->update_instrumen($id_mata, $data, "xin_kegiatan_mata");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
+  }
+
+  public function delete_mata_acara($id_kegiatan, $id_mata)
+  {
+    $this->Kegiatan_model->delete_instrumen($id_mata, "xin_kegiatan_mata");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
   }
 
   // working status > employee > chart

@@ -54,12 +54,18 @@ class Kegiatan_model extends CI_Model
     return  $insert_id;
   }
 
-  public function add_catatan($id, $data)
+  public function update_instrumen($id, $data, $table)
   {
-    echo json_encode($data);
-    die();
     $this->db->where('id', (int)$id);
-    $this->db->update('xin_kegiatan', $data);
+    $this->db->update($table, $data);
+
+    return true;
+  }
+
+  public function delete_instrumen($id, $table)
+  {
+    $this->db->where('id', (int)$id);
+    $this->db->delete($table);
 
     return true;
   }
@@ -136,5 +142,12 @@ class Kegiatan_model extends CI_Model
     $query = $this->db->get();
 
     return $query->result_array();
+  }
+
+  public function add_mata_acara($data)
+  {
+    $this->db->insert('xin_kegiatan_mata', $data);
+
+    return true;
   }
 }

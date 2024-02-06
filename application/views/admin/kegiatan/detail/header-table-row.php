@@ -9,12 +9,15 @@
   <th colspan="17">Sustainable Development Goals (SDGs)</th>
 </tr>
 <tr>
-  <th>Nama Kegiatan
-    <span data-toggle="tooltip" data-placement="top" title="Simpan Nama Kegiatan"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span>
-  </th>
-  <td> <!-- nama_kegiatan -->
-    <textarea name="nama_kegiatan" id="nama_kegiatan" rows="2" class="form-control form-table" style="width: 225px!important;" required>Produksi video pengetahuan alam</textarea>
-  </td>
+  <form action="<?= base_url() ?>admin/kegiatan/update_nama_kegiatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" method="post" accept-charset="utf-8">
+    <th>Nama Kegiatan
+      <span data-toggle="tooltip" data-placement="top" title="Simpan Nama Kegiatan"><button type="submit" class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span>
+    </th>
+    <td> <!-- nama_kegiatan -->
+      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+      <textarea name="nama_kegiatan" id="nama_kegiatan" rows="2" class="form-control form-table" style="width: 225px!important;" required><?= $choosed_kegiatan[0]['nama'] ?></textarea>
+    </td>
+  </form>
   <!-- Strategi Start -->
   <th><span data-toggle="tooltip" data-placement="top" title="Strategi Literasi">LIT</span></th>
   <th><span data-toggle="tooltip" data-placement="top" title="Strategi Diseminasi">DIS</span></th>
