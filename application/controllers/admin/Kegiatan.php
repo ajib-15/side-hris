@@ -876,6 +876,168 @@ class Kegiatan extends MY_Controller
     return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
   }
 
+  public function add_dokumen($id)
+  {
+    $data = array(
+      "id_kegiatan" => (int)$id,
+      "keterangan" => $this->input->post('nama_dokumen'),
+      "flag" => 0,
+      "link_file" => $this->input->post('link_file')
+    );
+    $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_dokumen");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function delete_dokumen($id_kegiatan, $id_dokumen)
+  {
+    $this->Kegiatan_model->delete_instrumen($id_dokumen, "xin_kegiatan_dokumen");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
+  }
+
+  public function update_flag_dokumen($id_kegiatan, $id_dokumen)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "flag" => array_key_exists('flag', $formData) ? ($formData['flag'] ? 1 : 0) : 0,
+    );
+
+    $this->Kegiatan_model->update_instrumen($id_dokumen, $data, "xin_kegiatan_dokumen");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id_kegiatan);
+  }
+
+  public function update_tema($id)
+  {
+    $data = array(
+      "tema" => $this->input->post('tema_kegiatan')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_pj($id)
+  {
+    $data = array(
+      "penanggung_jawab" => $this->input->post('penanggung_jawab')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_pendamping($id)
+  {
+    $data = array(
+      "pendamping" => $this->input->post('pendamping')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_lain_lain($id)
+  {
+    $data = array(
+      "lain_lain" => $this->input->post('lain_lain')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_momentum($id)
+  {
+    $data = array(
+      "momentum_tgl" => $this->input->post('momentum_tgl'),
+      "momentum_bln" => $this->input->post('momentum_bln'),
+      "momentum_jenis" => $this->input->post('momentum_jenis')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_ht($id)
+  {
+    $data = array(
+      "ht_huruf_hari" => $this->input->post('ht_huruf_hari'),
+      "ht_digit_tanggal" => $this->input->post('ht_digit_tanggal'),
+      "ht_digit_bulan" => $this->input->post('ht_digit_bulan'),
+      "ht_digit_tahun" => $this->input->post('ht_digit_tahun'),
+      "ht_digit_jam" => $this->input->post('ht_digit_jam'),
+      "ht_digit_menit" => $this->input->post('ht_digit_menit')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_inisiasi_rba($id)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "inisiasi_rba" => array_key_exists('inisiasi_rba', $formData) ? ($formData['inisiasi_rba'] ? 1 : 0) : 0,
+    );
+
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_inisiasi_kolaborator($id)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "inisiasi_kolaborator" => array_key_exists('inisiasi_kolaborator', $formData) ? ($formData['inisiasi_kolaborator'] ? 1 : 0) : 0,
+    );
+
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_inisiasi_mitra($id)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "inisiasi_mitra" => array_key_exists('inisiasi_mitra', $formData) ? ($formData['inisiasi_mitra'] ? 1 : 0) : 0,
+    );
+
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_catatan($id)
+  {
+    $data = array(
+      "catatan_publikasi" => $this->input->post('catatan_publikasi'),
+      "catatan_persiapan" => $this->input->post('catatan_persiapan'),
+      "catatan_pelaksanaan" => $this->input->post('catatan_pelaksanaan'),
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function update_lokasi($id)
+  {
+    $formData = $this->input->post();
+    $data = array(
+      "lokasi_kegiatan" => $this->input->post('lokasi_kegiatan'),
+      "lokasi_digital" => $this->input->post('lokasi_digital'),
+      "lokasi_jarak" => $this->input->post('lokasi_jarak'),
+      "lokasi_ih" => array_key_exists('lokasi_ih', $formData) ? ($formData['lokasi_ih'] ? 1 : 0) : 0,
+      "lokasi_or" => array_key_exists('lokasi_or', $formData) ? ($formData['lokasi_or'] ? 1 : 0) : 0,
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
   // working status > employee > chart
   public function employee_working_status()
   {
