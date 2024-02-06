@@ -79,8 +79,9 @@
       <div>
         <select name="status_validitas" id="status_validitas" class="form-control">
           <option selected disabled>Pilih Status Laporan</option>
-          <option value="valid">Laporan Valid</option>
-          <option value="invalid">Laporan Tidak Valid</option>
+          <option value="valid" <?= $choosed_kegiatan[0]['validitas'] === 'valid' ? 'selected' : '' ?>>Laporan Valid</option>
+          <option value="invalid" <?= $choosed_kegiatan[0]['validitas'] === 'invalid' ? 'selected' : '' ?>>Laporan Tidak Valid</option>
+          <option value="waiting" <?= $choosed_kegiatan[0]['validitas'] === 'waiting' ? 'selected' : '' ?>>Status Menunggu</option>
         </select>
       </div>
     </div>
@@ -433,7 +434,6 @@
 </script>
 
 <!-- Lokasi -->
-
 <script>
   var saveLokasi = document.querySelector('.saveLokasi');
   saveLokasi.addEventListener('click', function() {
@@ -492,5 +492,46 @@
     document.body.appendChild(form);
     // Submit the form
     form.submit();
+  });
+</script>
+
+<!-- Status Validitas -->
+<script>
+  const statusValiditasSelect = document.getElementById('status_validitas');
+  statusValiditasSelect.addEventListener('change', function() {
+    // Get the selected option
+    const selectedOption = statusValiditasSelect.value;
+
+    // Check if an option other than the default is selected
+    if (selectedOption.value !== "") {
+      // Create a form element dynamically
+      let form = document.createElement('form');
+      form.action = '<?= base_url() ?>admin/kegiatan/update_validitas/<?= $choosed_kegiatan[0]['id'] ?>'; // Replace with your actual delete endpoint
+      form.method = 'post';
+
+      // Create a hidden input for CSRF token
+      let csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+      csrfInput.value = '<?php echo $this->security->get_csrf_hash(); ?>';
+
+      // Append the CSRF input to the form
+      form.appendChild(csrfInput);
+
+      // Create a hidden input for selected checkbox values
+      let status_validitas = document.createElement('input');
+      status_validitas.type = 'hidden';
+      status_validitas.name = 'status_validitas';
+      status_validitas.required = true;
+      status_validitas.value = selectedOption;
+
+      // Append the hidden input to the form
+      form.appendChild(status_validitas);
+      // Append the form to the document body
+      document.body.appendChild(form);
+      // Submit the form
+      console.log(selectedOption);
+      form.submit();
+    }
   });
 </script>
