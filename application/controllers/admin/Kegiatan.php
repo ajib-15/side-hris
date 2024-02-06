@@ -17,6 +17,7 @@ class Kegiatan extends MY_Controller
     $this->load->model('Exin_model');
     $this->load->model('Expense_model');
     $this->load->model('Timesheet_model');
+    $this->load->model('Kegiatan_model');
     $this->load->model('Travel_model');
     $this->load->model('Training_model');
     $this->load->model('Project_model');
@@ -96,6 +97,12 @@ class Kegiatan extends MY_Controller
         'all_jobsx' => $this->Job_post_model->five_latest_jobs(),
         'all_jobs' => $this->Recruitment_model->get_all_jobs_last_desc()
       );
+      // Data Kegiatan
+      $data['start_date'] = $this->input->post('filter_tanggal_awal');
+      $data['end_date'] = $this->input->post('filter_tanggal_akhir');
+      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date']);
+      $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
+
       $data['subview'] = $this->load->view('admin/kegiatan/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     } else {
@@ -134,9 +141,477 @@ class Kegiatan extends MY_Controller
         'all_jobsx' => $this->Job_post_model->all_jobs(),
         'all_jobs' => $this->Recruitment_model->get_all_jobs_last_desc()
       );
+      // Data Kegiatan
+      $data['start_date'] = $this->input->post('filter_tanggal_awal');
+      $data['end_date'] = $this->input->post('filter_tanggal_akhir');
+      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date']);
+      $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
+
       $data['subview'] = $this->load->view('admin/kegiatan/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     }
+  }
+
+  public function total_partisipan($data)
+  {
+    $partisipan = array();
+    $totalPartisipan = 0;
+    $totalPartisipanPeserta = 0;
+    $totalPartisipanPenampil = 0;
+    $totalPartisipanFasilitator = 0;
+    $totalPartisipanNarasumber = 0;
+    $totalPartisipanPanitia = 0;
+    $totalPartisipanLaki = 0;
+    $totalPartisipanPerempuan = 0;
+    $totalPartisipan0_6 = 0;
+    $totalPartisipan7_12 = 0;
+    $totalPartisipan13_17 = 0;
+    $totalPartisipan18_30 = 0;
+    $totalPartisipan31_40 = 0;
+    $totalPartisipan41_60 = 0;
+    $totalPartisipan60 = 0;
+    foreach ($data as $item) {
+      $totalPartisipan += (int) $item['partisipan_total_digit'];
+      $totalPartisipanPeserta += (int) $item['partisipan_peserta'];
+      $totalPartisipanPenampil += (int) $item['partisipan_penampil'];
+      $totalPartisipanFasilitator += (int) $item['partisipan_fasilitator'];
+      $totalPartisipanNarasumber += (int) $item['partisipan_narasumber'];
+      $totalPartisipanPanitia += (int) $item['partisipan_panitia'];
+      $totalPartisipanLaki += (int) $item['partisipan_laki'];
+      $totalPartisipanLaki += (int) $item['partisipan_perempuan'];
+      $totalPartisipan0_6 += (int) $item['partisipan_0_6'];
+      $totalPartisipan7_12 += (int) $item['partisipan_7_12'];
+      $totalPartisipan13_17 += (int) $item['partisipan_13_17'];
+      $totalPartisipan18_30 += (int) $item['partisipan_18_30'];
+      $totalPartisipan31_40 += (int) $item['partisipan_31_40'];
+      $totalPartisipan41_60 += (int) $item['partisipan_41_60'];
+      $totalPartisipan60 += (int) $item['partisipan_60'];
+
+      $partisipan['total'] = $totalPartisipan;
+      $partisipan['partisipan_peserta'] = $totalPartisipanPeserta;
+      $partisipan['partisipan_penampil'] = $totalPartisipanPenampil;
+      $partisipan['partisipan_fasilitator'] = $totalPartisipanFasilitator;
+      $partisipan['partisipan_narasumber'] = $totalPartisipanNarasumber;
+      $partisipan['partisipan_panitia'] = $totalPartisipanPanitia;
+      $partisipan['partisipan_laki'] = $totalPartisipanLaki;
+      $partisipan['partisipan_perempuan'] = $totalPartisipanPerempuan;
+      $partisipan['partisipan_0_6'] = $totalPartisipan0_6;
+      $partisipan['partisipan_7_12'] = $totalPartisipan7_12;
+      $partisipan['partisipan_13_17'] = $totalPartisipan13_17;
+      $partisipan['partisipan_18_30'] = $totalPartisipan18_30;
+      $partisipan['partisipan_31_40'] = $totalPartisipan31_40;
+      $partisipan['partisipan_41_60'] = $totalPartisipan41_60;
+      $partisipan['partisipan_60'] = $totalPartisipan60;
+    }
+
+    return $partisipan;
+  }
+
+  public function kegiatan($filterstatus, $start_date, $end_date)
+  {
+    if ($filterstatus) {
+      $kegiatan = $this->Kegiatan_model->get_data_by_date_range($start_date, $end_date);
+    } else {
+      $kegiatan = $this->Kegiatan_model->get_all_kegiatan();
+    }
+    foreach ($kegiatan as &$item) {
+      // Tabel Declaration By Id Kegiatan
+      // Mata Acara
+      $mata_acara = $this->Kegiatan_model->get_mata_by_id_kegiatan($item['id']);
+
+      // Luring
+      $luring = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $luring += (int) $item_mata_acara['platform_rg'] + (int) $item_mata_acara['platform_hy'];
+        }
+      }
+      $item['luring'] = $luring;
+      // Daring
+      $daring = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $daring += (int) $item_mata_acara['platform_dg'];
+        }
+      }
+      $item['daring'] = $daring;
+
+      // Strategi LIT
+      $strategi_lit = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $strategi_lit += (int) $item_mata_acara['strategi_lit'];
+        }
+      }
+      $item['strategi_lit'] = $strategi_lit;
+      // Strategi DIS
+      $strategi_dis = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $strategi_dis += (int) $item_mata_acara['strategi_dis'];
+        }
+      }
+      $item['strategi_dis'] = $strategi_dis;
+      // Strategi INE
+      $strategi_ine = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $strategi_ine += (int) $item_mata_acara['strategi_ine'];
+        }
+      }
+      $item['strategi_ine'] = $strategi_ine;
+
+      // Kelompok CS
+      $kelompok_cs = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $kelompok_cs += (int) $item_mata_acara['kelompok_cs'];
+        }
+      }
+      $item['kelompok_cs'] = $kelompok_cs;
+      // Kelompok CR
+      $kelompok_cr = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $kelompok_cr += (int) $item_mata_acara['kelompok_cr'];
+        }
+      }
+      $item['kelompok_cr'] = $kelompok_cr;
+      // Kelompok CD
+      $kelompok_cd = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $kelompok_cd += (int) $item_mata_acara['kelompok_cd'];
+        }
+      }
+      $item['kelompok_cd'] = $kelompok_cd;
+      // Kelompok CE
+      $kelompok_ce = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $kelompok_ce += (int) $item_mata_acara['kelompok_ce'];
+        }
+      }
+      $item['kelompok_ce'] = $kelompok_ce;
+
+      // Fokus EDU
+      $fokus_edu = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $fokus_edu += (int) $item_mata_acara['fokus_edu'];
+        }
+      }
+      $item['fokus_edu'] = $fokus_edu;
+      // Fokus ECO
+      $fokus_eco = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $fokus_eco += (int) $item_mata_acara['fokus_eco'];
+        }
+      }
+      $item['fokus_eco'] = $fokus_eco;
+      // Fokus HQL
+      $fokus_hql = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $fokus_hql += (int) $item_mata_acara['fokus_hql'];
+        }
+      }
+      $item['fokus_hql'] = $fokus_hql;
+      // Fokus IE
+      $fokus_ie = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $fokus_ie += (int) $item_mata_acara['fokus_ie'];
+        }
+      }
+      $item['fokus_ie'] = $fokus_ie;
+
+      // Platform RG
+      $platform_rg = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $platform_rg += (int) $item_mata_acara['platform_rg'];
+        }
+      }
+      $item['platform_rg'] = $platform_rg;
+      // Platform DG
+      $platform_dg = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $platform_dg += (int) $item_mata_acara['platform_dg'];
+        }
+      }
+      $item['platform_dg'] = $platform_dg;
+      // Platform HY
+      $platform_hy = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $platform_hy += (int) $item_mata_acara['platform_hy'];
+        }
+      }
+      $item['platform_hy'] = $platform_hy;
+
+      // Literasi BT
+      $literasi_bt = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_bt += (int) $item_mata_acara['literasi_bt'];
+        }
+      }
+      $item['literasi_bt'] = $literasi_bt;
+      // Literasi NU
+      $literasi_nu = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_nu += (int) $item_mata_acara['literasi_nu'];
+        }
+      }
+      $item['literasi_nu'] = $literasi_nu;
+      // Literasi SA
+      $literasi_sa = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_sa += (int) $item_mata_acara['literasi_sa'];
+        }
+      }
+      $item['literasi_sa'] = $literasi_sa;
+      // Literasi DI
+      $literasi_di = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_di += (int) $item_mata_acara['literasi_di'];
+        }
+      }
+      $item['literasi_di'] = $literasi_di;
+      // Literasi FI
+      $literasi_fi = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_fi += (int) $item_mata_acara['literasi_fi'];
+        }
+      }
+      $item['literasi_fi'] = $literasi_fi;
+      // Literasi BK
+      $literasi_bk = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $literasi_bk += (int) $item_mata_acara['literasi_bk'];
+        }
+      }
+      $item['literasi_bk'] = $literasi_bk;
+
+      // Inklusivitas DS
+      $inklusivitas_ds = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $inklusivitas_ds += (int) $item_mata_acara['inklusivitas_ds'];
+        }
+      }
+      $item['inklusivitas_ds'] = $inklusivitas_ds;
+      // Inklusivitas MR
+      $inklusivitas_mr = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $inklusivitas_mr += (int) $item_mata_acara['inklusivitas_mr'];
+        }
+      }
+      $item['inklusivitas_mr'] = $inklusivitas_mr;
+      // Inklusivitas GD
+      $inklusivitas_gd = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $inklusivitas_gd += (int) $item_mata_acara['inklusivitas_gd'];
+        }
+      }
+      $item['inklusivitas_gd'] = $inklusivitas_gd;
+      // Inklusivitas 3T
+      $inklusivitas_3t = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $inklusivitas_3t += (int) $item_mata_acara['inklusivitas_3t'];
+        }
+      }
+      $item['inklusivitas_3t'] = $inklusivitas_3t;
+
+      // SDG 1
+      $sdg_1 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_1 += (int) $item_mata_acara['sdg_1'];
+        }
+      }
+      $item['sdg_1'] = $sdg_1;
+      // SDG 2
+      $sdg_2 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_2 += (int) $item_mata_acara['sdg_2'];
+        }
+      }
+      $item['sdg_2'] = $sdg_2;
+      // SDG 3
+      $sdg_3 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_3 += (int) $item_mata_acara['sdg_3'];
+        }
+      }
+      $item['sdg_3'] = $sdg_3;
+      // SDG 4
+      $sdg_4 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_4 += (int) $item_mata_acara['sdg_4'];
+        }
+      }
+      $item['sdg_4'] = $sdg_4;
+      // SDG 5
+      $sdg_5 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_5 += (int) $item_mata_acara['sdg_5'];
+        }
+      }
+      $item['sdg_5'] = $sdg_5;
+      // SDG 6
+      $sdg_6 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_6 += (int) $item_mata_acara['sdg_6'];
+        }
+      }
+      $item['sdg_6'] = $sdg_6;
+      // SDG 7
+      $sdg_7 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_7 += (int) $item_mata_acara['sdg_7'];
+        }
+      }
+      $item['sdg_7'] = $sdg_7;
+      // SDG 8
+      $sdg_8 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_8 += (int) $item_mata_acara['sdg_8'];
+        }
+      }
+      $item['sdg_8'] = $sdg_8;
+      // SDG 9
+      $sdg_9 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_9 += (int) $item_mata_acara['sdg_9'];
+        }
+      }
+      $item['sdg_9'] = $sdg_9;
+      // SDG 10
+      $sdg_10 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_10 += (int) $item_mata_acara['sdg_10'];
+        }
+      }
+      $item['sdg_10'] = $sdg_10;
+      // SDG 11
+      $sdg_11 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_11 += (int) $item_mata_acara['sdg_11'];
+        }
+      }
+      $item['sdg_11'] = $sdg_11;
+      // SDG 12
+      $sdg_12 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_12 += (int) $item_mata_acara['sdg_12'];
+        }
+      }
+      $item['sdg_12'] = $sdg_12;
+      // SDG 13
+      $sdg_13 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_13 += (int) $item_mata_acara['sdg_13'];
+        }
+      }
+      $item['sdg_13'] = $sdg_13;
+      // SDG 14
+      $sdg_14 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_14 += (int) $item_mata_acara['sdg_14'];
+        }
+      }
+      $item['sdg_14'] = $sdg_14;
+      // SDG 15
+      $sdg_15 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_15 += (int) $item_mata_acara['sdg_15'];
+        }
+      }
+      $item['sdg_15'] = $sdg_15;
+      // SDG 16
+      $sdg_16 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_16 += (int) $item_mata_acara['sdg_16'];
+        }
+      }
+      $item['sdg_16'] = $sdg_16;
+      // SDG 17
+      $sdg_17 = 0;
+      if (count($mata_acara) > 0) {
+        foreach ($mata_acara as $item_mata_acara) {
+          $sdg_17 += (int) $item_mata_acara['sdg_17'];
+        }
+      }
+      $item['sdg_17'] = $sdg_17;
+    }
+
+    return $kegiatan;
+  }
+
+  public function add_kegiatan()
+  {
+    $session = $this->session->userdata('username');
+    $data = array(
+      'kode' => $this->input->post('kode'),
+      'tanggal' => $this->input->post('tanggal'),
+      'nama' => $this->input->post('nama'),
+      'created_by' => (int)$session['user_id'],
+      'tema' => $this->input->post('tema'),
+      'lokasi_kegiatan' => $this->input->post('lokasi_kegiatan'),
+      'lokasi_digital' => $this->input->post('lokasi_digital'),
+      'penanggung_jawab' => $this->input->post('penanggung_jawab'),
+      'pendamping' => $this->input->post('pendamping'),
+    );
+    $result = $this->Kegiatan_model->add_kegiatan($data);
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $result);
+  }
+
+  public function delete()
+  {
+    $selectedCheckboxes = $this->input->post('selectedCheckboxes');
+    $deleted_ids = explode(',', $selectedCheckboxes);
+    foreach ($deleted_ids as $item) {
+      $this->Kegiatan_model->delete($item);
+    }
+    return redirect(base_url() . 'admin/kegiatan');
+  }
+
+  public function print()
+  {
+    $selectedCheckboxes = $this->input->post('selectedCheckboxes');
+    $choosed_id = explode(',', $selectedCheckboxes);
+
+    $data['kegiatan'] = $this->Kegiatan_model->get_kegiatan_by_id($choosed_id);
+    $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
+    $this->load->view('admin/kegiatan/excel-report', $data);
   }
 
   public function detail($id)
@@ -144,6 +619,11 @@ class Kegiatan extends MY_Controller
     $session = $this->session->userdata('username');
     if (empty($session)) {
       redirect('admin/');
+    }
+
+    $check = $this->Kegiatan_model->get_kegiatan_by_id($id);
+    if (count($check) < 1) {
+      redirect('admin/kegiatan');
     }
 
     $system = $this->Xin_model->read_setting_info(1);
@@ -193,6 +673,11 @@ class Kegiatan extends MY_Controller
         'all_jobsx' => $this->Job_post_model->five_latest_jobs(),
         'all_jobs' => $this->Recruitment_model->get_all_jobs_last_desc()
       );
+
+      // Data Kegiatan
+      $data['choosed_kegiatan'] = $check;
+      $data['kegiatan'] = $this->instrumen_kegiatan($id);
+
       $data['subview'] = $this->load->view('admin/kegiatan/detail/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     } else {
@@ -231,9 +716,53 @@ class Kegiatan extends MY_Controller
         'all_jobsx' => $this->Job_post_model->all_jobs(),
         'all_jobs' => $this->Recruitment_model->get_all_jobs_last_desc()
       );
+      // Data Kegiatan
+      $data['choosed_kegiatan'] = $check;
+      $data['kegiatan'] = $this->instrumen_kegiatan($id);
+
+
       $data['subview'] = $this->load->view('admin/kegiatan/detail/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     }
+  }
+
+  public function instrumen_kegiatan($id)
+  {
+    // Main Data
+    $data = $this->Kegiatan_model->get_kegiatan_by_id($id)[0];
+
+    // Get Mata Acara Kegiatan By Id Kegiatan
+    $data['mata_acara'] = $this->Kegiatan_model->get_mata_by_id_kegiatan($id);
+
+    // Get Tujuan Kegiatan
+    $data["tujuan"] = $this->Kegiatan_model->get_tujuan_by_id_kegiatan($id);
+
+    // Get Dokumen
+    $data["dokumen"] = $this->Kegiatan_model->get_dokumen_by_id_kegiatan($id);
+
+    // Get Kendala Kegiatan
+    $data["kendala"] = $this->Kegiatan_model->get_kendala_by_id_kegiatan($id);
+
+    // Get Solusi Kegiatan
+    $data["solusi"] = $this->Kegiatan_model->get_solusi_by_id_kegiatan($id);
+
+    // Get Pernaikan Kegiatan
+    $data["perbaikan"] = $this->Kegiatan_model->get_perbaikan_by_id_kegiatan($id);
+
+    // Get Kolaborator Kegiatan
+    $data["kolaborator"] = $this->Kegiatan_model->get_kolaborator_by_id_kegiatan($id);
+
+    return $data;
+  }
+
+  public function add_catatan($id)
+  {
+    $data = array(
+      "catatan" => $this->input->post('catatan_kegiatan')
+    );
+    $this->Kegiatan_model->add_catatan($id, $data);
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
   }
 
   // working status > employee > chart

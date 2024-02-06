@@ -36,8 +36,9 @@
 
 <div id="catatan" class="collapse add-formd animated fadeUp">
   <div class="ui-bordered px-4 pt-4 mb-4 mt-3">
-    <form action="<?= base_url() ?>" autocomplete="off" class="add form-hrm" method="get" accept-charset="utf-8">
-      <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control"></textarea>
+    <form action="<?= base_url() ?>admin/kegiatan/add_catatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST" accept-charset="utf-8">
+      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+      <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
       <div class="my-3 text-right">
         <button type="submit" class="btn btn-secondary ladda-button" data-style="expand-right">
           <span class="ladda-label"><i class="fas fa-check-square"></i> Simpan Catatan</span>
@@ -49,19 +50,19 @@
 <div class="card">
   <div class="card-header with-elements">
     <div class="card-header-elements">
-      <a class="text-dark" href="<?= base_url() ?>">
+      <a class="text-dark" href="<?= base_url() ?>admin/kegiatan/detail/<?= $choosed_kegiatan[0]['id'] ?>">
         <button type="button" class="btn btn-md btn-primary">
           <span class="ion ion-ios-refresh"></span>
           Refresh
         </button>
       </a>
-      <a class="text-dark" href="<?= base_url() ?>">
+      <a class="text-dark" href="<?= base_url() ?>admin/kegiatan/detail_print/<?= $choosed_kegiatan[0]['id'] ?>">
         <button type="button" class="btn btn-md btn-secondary">
           <span class="ion ion-ios-print"></span>
           Print
         </button>
       </a>
-      <a href="<?= base_url() ?>" class="text-dark">
+      <a href="<?= base_url() ?>admin/kegiatan/detail_delete/<?= $choosed_kegiatan[0]['id'] ?>" class="text-dark">
         <button type="button" class="btn btn-md btn-danger">
           <span class="ion ion-ios-trash"></span>
           Hapus
@@ -76,9 +77,10 @@
         </button>
       </a>
       <div>
-        <select name="status_validitas" id="status_validitas" class="form-control" style="padding-top: 0.1rem!important;padding-bottom: 0.1rem!important;padding-left: 0.2rem!important;font-size: .8rem!important">
+        <select name="status_validitas" id="status_validitas" class="form-control">
+          <option selected disabled>Pilih Status Laporan</option>
           <option value="valid">Laporan Valid</option>
-          <option value="tidak_valid">Laporan Tidak Valid</option>
+          <option value="invalid">Laporan Tidak Valid</option>
         </select>
       </div>
     </div>

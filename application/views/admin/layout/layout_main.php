@@ -133,6 +133,7 @@ if (!is_null($role_user)) {
     $(document).ready(function() {
       var kegiatan_table = $(".kegiatan_table").dataTable({
         bDestroy: true,
+        "ordering": false,
         fnDrawCallback: function(settings) {
           $('[data-toggle="tooltip"]').tooltip();
         },
