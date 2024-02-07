@@ -11,12 +11,29 @@ class Kegiatan_model extends CI_Model
   }
 
   // Get All Kegiatan
-  public function get_all_kegiatan()
+  public function get_all_kegiatan($role, $id_user)
   {
     $this->db->select('*')
       ->from('xin_kegiatan');
+    if ($role != "1" && $role != "3") {
+      $this->db->where('created_by', (int)$id_user);
+    }
 
     $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_data_by_date_range($start_date, $end_date, $role, $id_user)
+  {
+    $this->db->from('xin_kegiatan');
+    $this->db->where('tanggal >=', $start_date);
+    $this->db->where('tanggal <=', $end_date);
+    if ($role !== "1" && $role !== "3") {
+      $this->db->where('created_by', (int)$id_user);
+    }
+    $query = $this->db->get();
+
+    // Kembalikan hasil sebagai array
     return $query->result_array();
   }
 
@@ -31,18 +48,16 @@ class Kegiatan_model extends CI_Model
     return $query->result_array();
   }
 
-
-  public function get_data_by_date_range($start_date, $end_date)
+  public function get_employees()
   {
-    // Ganti 'your_table_name' dengan nama tabel yang sesuai
-    $this->db->from('xin_kegiatan');
-    $this->db->where('tanggal >=', $start_date);
-    $this->db->where('tanggal <=', $end_date);
+    $this->db->from('xin_employees');
+    $this->db->where_in('user_role_id', "2");
     $query = $this->db->get();
 
-    // Kembalikan hasil sebagai array
+    // Return the result as an array
     return $query->result_array();
   }
+
 
 
   // add kegiatan

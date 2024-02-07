@@ -100,7 +100,10 @@ class Kegiatan extends MY_Controller
       // Data Kegiatan
       $data['start_date'] = $this->input->post('filter_tanggal_awal');
       $data['end_date'] = $this->input->post('filter_tanggal_akhir');
-      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date']);
+      $role = $user[0]->user_role_id;
+      $id_user = $user[0]->user_id;
+      $data['data_user'] = $user;
+      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date'], $role, $id_user);
       $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
 
       $data['subview'] = $this->load->view('admin/kegiatan/index', $data, TRUE);
@@ -144,7 +147,10 @@ class Kegiatan extends MY_Controller
       // Data Kegiatan
       $data['start_date'] = $this->input->post('filter_tanggal_awal');
       $data['end_date'] = $this->input->post('filter_tanggal_akhir');
-      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date']);
+      $role = $user[0]->user_role_id;
+      $id_user = $user[0]->user_id;
+      $data['data_user'] = $user;
+      $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date'], $role, $id_user);
       $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
 
       $data['subview'] = $this->load->view('admin/kegiatan/index', $data, TRUE);
@@ -207,12 +213,12 @@ class Kegiatan extends MY_Controller
     return $partisipan;
   }
 
-  public function kegiatan($filterstatus, $start_date, $end_date)
+  public function kegiatan($filterstatus, $start_date, $end_date, $role, $id_user)
   {
     if ($filterstatus) {
-      $kegiatan = $this->Kegiatan_model->get_data_by_date_range($start_date, $end_date);
+      $kegiatan = $this->Kegiatan_model->get_data_by_date_range($start_date, $end_date, $role, $id_user);
     } else {
-      $kegiatan = $this->Kegiatan_model->get_all_kegiatan();
+      $kegiatan = $this->Kegiatan_model->get_all_kegiatan($role, $id_user);
     }
     foreach ($kegiatan as &$item) {
       // Tabel Declaration By Id Kegiatan
@@ -676,6 +682,8 @@ class Kegiatan extends MY_Controller
 
       // Data Kegiatan
       $data['choosed_kegiatan'] = $check;
+      $data['employees'] = $this->Kegiatan_model->get_employees();
+      $data['data_user'] = $user;
       $data['kegiatan'] = $this->instrumen_kegiatan($id);
 
       $data['subview'] = $this->load->view('admin/kegiatan/detail/index', $data, TRUE);
@@ -717,7 +725,9 @@ class Kegiatan extends MY_Controller
         'all_jobs' => $this->Recruitment_model->get_all_jobs_last_desc()
       );
       // Data Kegiatan
+      $data['employees'] = $this->Kegiatan_model->get_employees();
       $data['choosed_kegiatan'] = $check;
+      $data['data_user'] = $user;
       $data['kegiatan'] = $this->instrumen_kegiatan($id);
 
 
@@ -751,6 +761,95 @@ class Kegiatan extends MY_Controller
 
     // Get Kolaborator Kegiatan
     $data["kolaborator"] = $this->Kegiatan_model->get_kolaborator_by_id_kegiatan($id);
+
+    // Total Strategi
+    $strategi_lit = 0;
+    $strategi_dis = 0;
+    $strategi_ine = 0;
+    // Total Kelompok
+    $kelompok_cs = 0;
+    $kelompok_cr = 0;
+    $kelompok_cd = 0;
+    $kelompok_ce = 0;
+    // Total Platform
+    $platform_rg = 0;
+    $platform_dg = 0;
+    $platform_hy = 0;
+    foreach ($data['mata_acara'] as $mata_acara) {
+      // Total Strategi
+      if ($mata_acara['strategi_lit']) {
+        $strategi_lit += 1;
+      }
+      if ($mata_acara['strategi_dis']) {
+        $strategi_dis += 1;
+      }
+      if ($mata_acara['strategi_ine']) {
+        $strategi_ine += 1;
+      }
+      // Total Kelompok
+      if ($mata_acara['kelompok_cs']) {
+        $kelompok_cs += 1;
+      }
+      if ($mata_acara['kelompok_cr']) {
+        $kelompok_cr += 1;
+      }
+      if ($mata_acara['kelompok_cd']) {
+        $kelompok_cd += 1;
+      }
+      if ($mata_acara['kelompok_ce']) {
+        $kelompok_ce += 1;
+      }
+      // Total Platform
+      if ($mata_acara['platform_rg']) {
+        $platform_rg += 1;
+      }
+      if ($mata_acara['platform_dg']) {
+        $platform_dg += 1;
+      }
+      if ($mata_acara['platform_hy']) {
+        $platform_hy += 1;
+      }
+    }
+    $data['total_strategi'] = $strategi_lit + $strategi_dis + $strategi_ine;
+    $data['total_kelompok'] = $kelompok_cs + $kelompok_cr + $kelompok_cd + $kelompok_ce;
+    $data['total_platform'] = $platform_rg + $platform_dg + $platform_hy;
+
+
+    // Total S1/S2/S3
+    $sektor_pertama = 0;
+    $sektor_dua = 0;
+    $sektor_tiga = 0;
+    // Total New/MoU
+    $mitra_baru = 0;
+    $sudah_kerja_sama = 0;
+    foreach ($data['kolaborator'] as $kolaborator) {
+      // Total S1/S2/S3
+      if ($kolaborator['sektor_pertama']) {
+        $sektor_pertama += 1;
+      }
+      if ($kolaborator['sektor_dua']) {
+        $sektor_dua += 1;
+      }
+      if ($kolaborator['sektor_tiga']) {
+        $sektor_tiga += 1;
+      }
+      // Total New/MoU
+      if ($kolaborator['mitra_baru']) {
+        $mitra_baru += 1;
+      }
+      if ($kolaborator['sudah_kerja_sama']) {
+        $sudah_kerja_sama += 1;
+      }
+    }
+    $data['total_sektor'] = $sektor_pertama + $sektor_dua + $sektor_tiga;
+
+    // Total Berdasarkan Peran
+    $data['total_peran'] = (int)$data['partisipan_peserta'] + (int)$data['partisipan_penampil'] + (int)$data['partisipan_fasilitator'] + (int)$data['partisipan_narasumber'] + (int)$data['partisipan_peserta'];
+    // Total Berdasarkan Gender
+    $data['total_gender'] = (int)$data['partisipan_laki'] + (int)$data['partisipan_perempuan'];
+    // Total Berdasarkan usia
+    $data['total_usia'] = (int)$data['partisipan_0_6'] + (int)$data['partisipan_7_12'] + (int)$data['partisipan_13_17'] + (int)$data['partisipan_18_30'] + (int)$data['partisipan_31_40'] + (int)$data['partisipan_41_60'] + (int)$data['partisipan_60'];
+
     return $data;
   }
 
@@ -758,6 +857,34 @@ class Kegiatan extends MY_Controller
   {
     $data = array(
       "catatan" => $this->input->post('catatan_kegiatan')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+
+  public function add_validasi($id)
+  {
+    $data = array(
+      "validasi_nama_pj" => $this->input->post('validasi_nama_pj'),
+      "validasi_no_kontak" => $this->input->post('validasi_no_kontak'),
+      "validasi_alamat_surel" => $this->input->post('validasi_alamat_surel'),
+      "validasi_nama_user" => $this->input->post('validasi_nama_user'),
+      "validasi_penempatan" => $this->input->post('validasi_penempatan')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+  public function add_verifikator($id)
+  {
+    $data = array(
+      "verifikator_nama" => $_POST['verifikator_nama'],
+      "verifikator_no_kontak" => $this->input->post('verifikator_no_kontak'),
+      "verifikator_alamat_surel" => $this->input->post('verifikator_alamat_surel'),
+      "verifikator_jabatan" => $this->input->post('verifikator_jabatan'),
     );
     $this->Kegiatan_model->update_instrumen($id, $data, "xin_kegiatan");
 
@@ -775,6 +902,17 @@ class Kegiatan extends MY_Controller
   {
     $data = array(
       "nama" => $this->input->post('nama_kegiatan')
+    );
+    $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
+
+    return redirect(base_url() . 'admin/kegiatan/detail/' . $id);
+  }
+
+
+  public function update_sub_heading($id)
+  {
+    $data = array(
+      "sub_heading" => $this->input->post('sub_heading')
     );
     $this->Kegiatan_model->update_instrumen($id, $data, 'xin_kegiatan');
 

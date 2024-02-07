@@ -21,7 +21,8 @@
     gap: 10px;
   }
 
-  .datatables-demo {
+  .datatables-demo,
+  .table {
     font-size: 10px !important;
   }
 
@@ -70,20 +71,36 @@
       </a>
     </div>
     <div class="card-header-elements ml-md-auto align-items-center">
-      <a class="text-dark collapsed" data-toggle="collapse" href="#catatan" aria-expanded="false">
-        <button type="button" class="btn btn-md btn-info">
-          <span class="ion ion-ios-document"></span>
-          Catatan
-        </button>
-      </a>
-      <div>
-        <select name="status_validitas" id="status_validitas" class="form-control">
-          <option selected disabled>Pilih Status Laporan</option>
-          <option value="valid" <?= $choosed_kegiatan[0]['validitas'] === 'valid' ? 'selected' : '' ?>>Laporan Valid</option>
-          <option value="invalid" <?= $choosed_kegiatan[0]['validitas'] === 'invalid' ? 'selected' : '' ?>>Laporan Tidak Valid</option>
-          <option value="waiting" <?= $choosed_kegiatan[0]['validitas'] === 'waiting' ? 'selected' : '' ?>>Status Menunggu</option>
-        </select>
-      </div>
+      <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
+        <a class="text-dark collapsed" data-toggle="collapse" href="#catatan" aria-expanded="false">
+          <button type="button" class="btn btn-md btn-info">
+            <span class="ion ion-ios-document"></span>
+            Catatan
+          </button>
+        </a>
+      <?php endif; ?>
+
+      <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
+        <div>
+          <select name="status_validitas" id="status_validitas" class="form-control">
+            <option value="valid" <?= $choosed_kegiatan[0]['validitas'] === 'valid' ? 'selected' : '' ?>>Laporan Valid</option>
+            <option value="invalid" <?= $choosed_kegiatan[0]['validitas'] === 'invalid' ? 'selected' : '' ?>>Laporan Tidak Valid</option>
+            <option value="waiting" <?= $choosed_kegiatan[0]['validitas'] === 'waiting' ? 'selected' : '' ?>>Status Menunggu</option>
+          </select>
+        </div>
+      <?php else : ?>
+        <div>
+          <select name="status_validitas" id="status_validitas" class="form-control" disabled>
+            <?php if ($choosed_kegiatan[0]['validitas'] === 'waiting') { ?>
+              <option value="">Status Menunggu</option>
+            <?php } elseif ($choosed_kegiatan[0]['validitas'] === 'valid') { ?>
+              <option value="">Laporan Valid</option>
+            <?php } else { ?>
+              <option value="">Laporan Tidak Valid</option>
+            <?php } ?>
+          </select>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>
@@ -256,6 +273,136 @@
     </div>
   </div>
 </div>
+<br>
+
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Total Strategi</th>
+          <th>Total Kelompok Kegiatan</th>
+          <th>Total Platform</th>
+          <th>Total S1/S2/S3</th>
+          <th>Berdasarkan Peran</th>
+          <th>Berdasarkan Gender</th>
+          <th>Berdasarkan Usia</th>
+        </tr>
+        <tr>
+          <td class="text-center"><?= $kegiatan['total_strategi'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_kelompok'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_platform'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_sektor'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_peran'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_gender'] ?></td>
+          <td class="text-center"><?= $kegiatan['total_usia'] ?></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form action="<?= base_url() ?>admin/kegiatan/add_validasi/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST">
+          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  Validasi
+                  <span data-toggle="tooltip" data-placement="top" title="Simpan Validasi"><button type="submit" class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span>
+                </th>
+              </tr>
+            </thead>
+            <tr>
+              <th>Nama Penanggung Jawab</th>
+              <td>
+                <input class="form-control" type="text" name="validasi_nama_pj" value="<?= $choosed_kegiatan[0]['validasi_nama_pj'] ?>" placeholder="Nama Penanggung Jawab" required>
+              </td>
+            </tr>
+            <tr>
+              <th>Nomor Kontak</th>
+              <td>
+                <input class="form-control" type="text" name="validasi_no_kontak" value="<?= $choosed_kegiatan[0]['validasi_no_kontak'] ?>" placeholder="Nomor Kontak" required>
+              </td>
+            </tr>
+            <tr>
+              <th>Alamat User</th>
+              <td>
+                <input class="form-control" type="text" name="validasi_alamat_surel" value="<?= $choosed_kegiatan[0]['validasi_alamat_surel'] ?>" placeholder="Alamat User" required>
+              </td>
+            </tr>
+            <tr>
+              <th>Nama User</th>
+              <td>
+                <input class="form-control" type="text" name="validasi_nama_user" value="<?= $choosed_kegiatan[0]['validasi_nama_user'] ?>" placeholder="Nama User" required>
+              </td>
+            </tr>
+            <tr>
+              <th>Penempatan</th>
+              <td>
+                <input class="form-control" type="text" name="validasi_penempatan" value="<?= $choosed_kegiatan[0]['validasi_penempatan'] ?>" placeholder="Penempatan" required>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <form action="<?= base_url() ?>admin/kegiatan/add_verifikator/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST">
+          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  Verifikator
+                  <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
+                    <span data-toggle="tooltip" data-placement="top" title="Simpan Verifikator"><button type="submit" class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span>
+                  <?php endif; ?>
+                </th>
+              </tr>
+            </thead>
+            <tr>
+              <th>Nama</th>
+              <td>
+                <select class="form-control" name="verifikator_nama" id="verifikator_nama" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
+                  <option selected disabled>Pilih Verifikator
+                  </option>
+                  <?php foreach ($employees as $employee) : ?>
+                    <option value="<?= $employee['username'] ?>" <?= ($employee['username'] === $choosed_kegiatan[0]['verifikator_nama']) ? 'selected' : '' ?>><?= $employee['username'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>Nomor Kontak</th>
+              <td>
+                <input class="form-control" type="text" name="verifikator_no_kontak" value="<?= $choosed_kegiatan[0]['verifikator_no_kontak'] ?>" placeholder="Nomor Kontak" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
+              </td>
+            </tr>
+            <tr>
+              <th>Alamat User</th>
+              <td>
+                <input class="form-control" type="text" name="verifikator_alamat_surel" value="<?= $choosed_kegiatan[0]['verifikator_alamat_surel'] ?>" placeholder="Alamat User" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
+              </td>
+            </tr>
+            <tr>
+              <th>Jabatan</th>
+              <td>
+                <input class="form-control" type="text" name="verifikator_jabatan" value="<?= $choosed_kegiatan[0]['verifikator_jabatan'] ?>" placeholder="Jabatan" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Verifikator -->
 
 <!-- Momentum -->
 <script>
