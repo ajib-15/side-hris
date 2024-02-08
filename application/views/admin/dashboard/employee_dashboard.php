@@ -263,6 +263,30 @@ if ($attendances->num_rows() < 1) {
     <?php } ?>
   <?php } ?>
 </div>
+
+<!-- Diagram Kegiatan Start -->
+<div class="card mb-4">
+  <h6 class="card-header with-elements">
+    <div class="card-header-title">Kegiatan</div>
+  </h6>
+  <div class="row no-gutters row-bordered">
+    <div class="col-md-3">
+      <div class="card-body">
+        <div style="height: 210px;">
+          <canvas id="grafik_mingguan" style="display: block; height: 210px; width: 754px;" width="942" height="262"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <div style="height: 210px;">
+          <canvas id="grafik_bulanan" style="display: block; height: 210px; width: 754px;" width="942" height="262"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Diagram Kegiatan End -->
 <?php if (in_array('37', $role_resources_ids)) { ?>
   <div class="card mb-4">
     <h6 class="card-header with-elements">

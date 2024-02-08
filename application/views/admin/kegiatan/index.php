@@ -152,6 +152,8 @@ $theme = $this->Xin_model->read_theme_info(1);
         <span><strong>Periode:</strong> <?= $start_date ?> - <?= $end_date ?></span>
         <span><a href="<?= base_url() ?>admin/kegiatan"><i class="fas fa-retweet"></i></a></span>
       <?php endif; ?>
+      <input type="hidden" name="hidden_start_date" id="hidden_start_date" value=" <?= $start_date ?>">
+      <input type="hidden" name="hidden_end_date" id="hidden_end_date" value=" <?= $end_date ?>">
     </span>
     <div class="card-header-elements ml-md-auto">
       <div class="text-dark">
@@ -267,8 +269,8 @@ $theme = $this->Xin_model->read_theme_info(1);
                 <td><?= $item['tanggal'] ?></td>
                 <td><a href="<?= base_url() ?>admin/kegiatan/detail/<?= $item['id'] ?>"><?= $item['nama'] ?></a></td>
                 <td><?= $item['ht_digit_jam'] ? $item['ht_digit_jam'] . ' Jam' : '-' ?> <?= $item['ht_digit_menit'] ?  ' & ' . $item['ht_digit_menit'] . ' Menit' : '' ?></td>
-                <td><?= $item['ht_digit_jam'] ? $item['ht_digit_jam'] : '-' ?></td>
-                <td><?= $item['strategi_lit'] ?></td>
+                <td><?= $item['luring'] ?></td>
+                <td><?= $item['daring'] ?></td>
                 <!-- Strategi Start -->
                 <td><?= $item['strategi_lit'] ?></td>
                 <td><?= $item['strategi_dis'] ?></td>
@@ -491,8 +493,20 @@ $theme = $this->Xin_model->read_theme_info(1);
     input.name = 'selectedCheckboxes';
     input.value = selectedCheckboxValues.join(',');
 
+    var hidden_start_date = document.createElement('input');
+    hidden_start_date.type = 'hidden';
+    hidden_start_date.name = 'hidden_start_date';
+    hidden_start_date.value = document.getElementById('hidden_start_date').value;
+
+    var hidden_end_date = document.createElement('input');
+    hidden_end_date.type = 'hidden';
+    hidden_end_date.name = 'hidden_end_date';
+    hidden_end_date.value = document.getElementById('hidden_end_date').value;
+
     // Append the hidden input to the form
     form.appendChild(input);
+    form.appendChild(hidden_start_date);
+    form.appendChild(hidden_end_date);
 
     // Append the form to the document body
     document.body.appendChild(form);

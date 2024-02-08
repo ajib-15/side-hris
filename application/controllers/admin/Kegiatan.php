@@ -153,6 +153,7 @@ class Kegiatan extends MY_Controller
       $data['kegiatan'] = $this->kegiatan($this->input->post('filter'), $data['start_date'], $data['end_date'], $role, $id_user);
       $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
 
+
       $data['subview'] = $this->load->view('admin/kegiatan/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     }
@@ -613,9 +614,24 @@ class Kegiatan extends MY_Controller
   public function print()
   {
     $selectedCheckboxes = $this->input->post('selectedCheckboxes');
-    $choosed_id = explode(',', $selectedCheckboxes);
+    $hidden_start_date = $this->input->post('hidden_start_date');
+    $hidden_end_date = $this->input->post('hidden_end_date');
 
-    $data['kegiatan'] = $this->Kegiatan_model->get_kegiatan_by_id($choosed_id);
+    $session = $this->session->userdata('username');
+    $user = $this->Xin_model->read_user_info($session['user_id']);
+    $role = $user[0]->user_role_id;
+    $id_user = $user[0]->user_id;
+
+    if ($hidden_start_date == " " || $hidden_end_date == " ") {
+      $kegiatan = $this->kegiatan(false, $hidden_start_date, $hidden_end_date, $role, $id_user);
+    } else {
+      $kegiatan = $this->kegiatan(true, $hidden_start_date, $hidden_end_date, $role, $id_user);
+      $data['start_date'] = $hidden_start_date;
+      $data['end_date'] = $hidden_end_date;
+    }
+
+
+    $data['kegiatan'] = $kegiatan;
     $data['partisipan'] = $data['kegiatan'] ? $this->total_partisipan($data['kegiatan']) : null;
     $this->load->view('admin/kegiatan/excel-report', $data);
   }
@@ -734,6 +750,29 @@ class Kegiatan extends MY_Controller
       $data['subview'] = $this->load->view('admin/kegiatan/detail/index', $data, TRUE);
       $this->load->view('admin/layout/layout_main', $data); //page load
     }
+  }
+
+
+  public function detail_print($id)
+  {
+    $session = $this->session->userdata('username');
+    if (empty($session)) {
+      redirect('admin/');
+    }
+
+    $check = $this->Kegiatan_model->get_kegiatan_by_id($id);
+    if (count($check) < 1) {
+      redirect('admin/kegiatan');
+    }
+
+    $user = $this->Xin_model->read_user_info($session['user_id']);
+
+    $data['choosed_kegiatan'] = $check;
+    $data['employees'] = $this->Kegiatan_model->get_employees();
+    $data['data_user'] = $user;
+    $data['kegiatan'] = $this->instrumen_kegiatan($id);
+
+    $this->load->view('admin/kegiatan/detail/excel-report', $data);
   }
 
   public function instrumen_kegiatan($id)

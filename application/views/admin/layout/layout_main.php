@@ -230,7 +230,7 @@ if (!is_null($role_user)) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(response) {
-          //var bgcolor = [];
+          //var bgcolor = []; 
           var final = [];
           var final2 = [];
           for (i = 0; i < response.c_name.length; i++) {
@@ -271,7 +271,7 @@ if (!is_null($role_user)) {
             labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
             datasets: [{
               label: 'Jumlah Kegiatan',
-              data: generateRandomDataWeekly(),
+              data: [<?php echo implode(', ', $weeklyCounts) ?>],
               backgroundColor: generateRandomColors(4)
             }]
           };
@@ -360,12 +360,16 @@ if (!is_null($role_user)) {
             labels: generateLabelsForPast12Months(),
             datasets: [{
                 label: 'Laki-Laki',
-                data: generateRandomDataMonthly(),
+                data: [<?php foreach ($weeklyMonths as $key => $value) {
+                          echo $value['total_laki'] . ",";
+                        } ?>],
                 backgroundColor: 'rgba(54, 162, 235, 0.7)', // Example color for male
               },
               {
                 label: 'Perempuan',
-                data: generateRandomDataMonthly(),
+                data: [<?php foreach ($weeklyMonths as $key => $value) {
+                          echo $value['total_perempuan'] . ",";
+                        } ?>],
                 backgroundColor: 'rgba(255, 99, 132, 0.7)', // Example color for female
               },
             ],

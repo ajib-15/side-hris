@@ -164,4 +164,70 @@ class Kegiatan_model extends CI_Model
     $this->db->insert($table, $data);
     return true;
   }
+
+  public function getWeeklyDataCount()
+  {
+    // Get the current month and year
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    // Calculate the start and end dates for the current month
+    $startDate = date('Y-m-01');
+    $endDate = date('Y-m-t');
+
+    // Initialize an array to store the weekly data counts
+    $weeklyCounts = array_fill(0, 4, 0);
+
+    // Get the total days in the current month
+    $totalDays = date('t', strtotime($startDate));
+
+    // Calculate the number of days in each week
+    $daysPerWeek = ceil($totalDays / 4);
+
+    // Loop through each week and get the data count
+    for ($i = 0; $i < 4; $i++) {
+      // Calculate the start and end dates for the current week
+      $startDay = $i * $daysPerWeek + 1;
+      $endDay = min(($i + 1) * $daysPerWeek, $totalDays);
+      $weekStartDate = date('Y-m-d', strtotime("$currentYear-$currentMonth-$startDay"));
+      $weekEndDate = date('Y-m-d', strtotime("$currentYear-$currentMonth-$endDay"));
+
+      // Get the data count for the current week
+      $weeklyCounts[$i] = $this->db->where('tanggal >=', $weekStartDate)
+        ->where('tanggal <=', $weekEndDate)
+        ->count_all_results('xin_kegiatan');
+    }
+    return $weeklyCounts;
+  }
+  public function getMonthlyGenderCount()
+  {
+    // Get the current year
+    $currentYear = date('Y');
+
+    // Initialize an array to store the monthly gender counts
+    $monthlyGenderCounts = [];
+
+    // Loop through each month and get the gender counts
+    for ($month = 1; $month <= 12; $month++) {
+      // Calculate the start and end dates for the current month
+      $startDate = date('Y-m-01', mktime(0, 0, 0, $month, 1, $currentYear));
+      $endDate = date('Y-m-t', mktime(0, 0, 0, $month, 1, $currentYear));
+
+      // Get the total number of men and women for the current month
+      $this->db->select_sum('partisipan_laki', 'total_laki');
+      $this->db->select_sum('partisipan_perempuan', 'total_perempuan');
+      $this->db->where('tanggal >=', $startDate);
+      $this->db->where('tanggal <=', $endDate);
+      $query = $this->db->get('xin_kegiatan');
+
+      // Store the gender counts for the current month
+      $result = $query->row_array();
+      $monthlyGenderCounts[$month] = [
+        'total_laki' => $result['total_laki'] ?? 0,
+        'total_perempuan' => $result['total_perempuan'] ?? 0
+      ];
+    }
+
+    return $monthlyGenderCounts;
+  }
 }

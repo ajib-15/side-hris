@@ -12,6 +12,7 @@ header("Content-Disposition: attachment; filename=Lembar Rekapitulasi Data.xls")
 </style>
 
 <h3>Lembar Rekapitulasi Data</h3>
+<h5>Periode: <?= $start_date ?> - <?= $end_date ?></h5>
 <table>
   <thead>
     <tr>
@@ -62,9 +63,9 @@ header("Content-Disposition: attachment; filename=Lembar Rekapitulasi Data.xls")
       <td><span data-toggle="tooltip" data-placement="top" title="Literasi Budaya dan Kewargaan">BK</span></td>
       <!-- 6 Literasi Dasar End -->
       <!-- Inklusivitas Start -->
-      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Down Syndrome">DS</span></td>
-      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Marginal">MR</span></td>
-      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Grand Design">GD</span></td>
+      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Netra">DN</span></td>
+      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Rungu">DR</span></td>
+      <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Lain">DL</span></td>
       <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas 3T (Terdepan, Terluar dan Tertinggal)">3T</span></td>
       <!-- Inklusivitas End -->
       <!-- SDGS Start -->
@@ -98,62 +99,62 @@ header("Content-Disposition: attachment; filename=Lembar Rekapitulasi Data.xls")
           <td><?= $item['tanggal'] ?></td>
           <td><?= $item['nama'] ?></td>
           <td><?= $item['ht_digit_jam'] ? $item['ht_digit_jam'] . ' Jam' : '-' ?> <?= $item['ht_digit_menit'] ?  ' & ' . $item['ht_digit_menit'] . ' Menit' : '' ?></td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['luring'] ?></td>
+          <td><?= $item['daring'] ?></td>
           <!-- Strategi Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['strategi_lit'] ?></td>
+          <td><?= $item['strategi_dis'] ?></td>
+          <td><?= $item['strategi_ine'] ?></td>
           <!-- Strategi End -->
           <!-- Kelompok Kegiatan Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['kelompok_cs'] ?></td>
+          <td><?= $item['kelompok_cr'] ?></td>
+          <td><?= $item['kelompok_cd'] ?></td>
+          <td><?= $item['kelompok_ce'] ?></td>
           <!-- Kelompok Kegiatan End -->
           <!-- Fokus Kegiatan Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['fokus_edu'] ?></td>
+          <td><?= $item['fokus_eco'] ?></td>
+          <td><?= $item['fokus_hql'] ?></td>
+          <td><?= $item['fokus_ie'] ?></td>
           <!-- Fokus Kegiatan End -->
           <!-- Platform Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['platform_rg'] ?></td>
+          <td><?= $item['platform_dg'] ?></td>
+          <td><?= $item['platform_hy'] ?></td>
           <!-- Platform End -->
           <!-- 6 Literasi Dasar Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['literasi_bt'] ?></td>
+          <td><?= $item['literasi_nu'] ?></td>
+          <td><?= $item['literasi_sa'] ?></td>
+          <td><?= $item['literasi_di'] ?></td>
+          <td><?= $item['literasi_fi'] ?></td>
+          <td><?= $item['literasi_bk'] ?></td>
           <!-- 6 Literasi Dasar End -->
           <!-- Inklusivitas Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['inklusivitas_ds'] ?></td>
+          <td><?= $item['inklusivitas_mr'] ?></td>
+          <td><?= $item['inklusivitas_gd'] ?></td>
+          <td><?= $item['inklusivitas_3t'] ?></td>
           <!-- Inklusivitas End -->
           <!-- SDGS Start -->
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
+          <td><?= $item['sdg_1'] ?></td>
+          <td><?= $item['sdg_2'] ?></td>
+          <td><?= $item['sdg_3'] ?></td>
+          <td><?= $item['sdg_4'] ?></td>
+          <td><?= $item['sdg_5'] ?></td>
+          <td><?= $item['sdg_6'] ?></td>
+          <td><?= $item['sdg_7'] ?></td>
+          <td><?= $item['sdg_8'] ?></td>
+          <td><?= $item['sdg_9'] ?></td>
+          <td><?= $item['sdg_10'] ?></td>
+          <td><?= $item['sdg_11'] ?></td>
+          <td><?= $item['sdg_12'] ?></td>
+          <td><?= $item['sdg_13'] ?></td>
+          <td><?= $item['sdg_14'] ?></td>
+          <td><?= $item['sdg_15'] ?></td>
+          <td><?= $item['sdg_16'] ?></td>
+          <td><?= $item['sdg_17'] ?></td>
           <!-- SDGS End -->
         </tr>
       <?php $no++;

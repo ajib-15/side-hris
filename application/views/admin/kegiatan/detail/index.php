@@ -145,7 +145,6 @@
           </form>
           <!-- Lain-Lain -->
         </tr>
-
         <tr>
           <!-- Momentum -->
           <th rowspan="3">Momentum
