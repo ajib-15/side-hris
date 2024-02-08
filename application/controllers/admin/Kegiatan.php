@@ -1180,7 +1180,10 @@ class Kegiatan extends MY_Controller
   {
     $data = array(
       "id_kegiatan" => (int)$id,
-      "keterangan" => $this->input->post('kendala_kegiatan')
+      "publikasi" => $this->input->post('publikasi'),
+      "persiapan" => $this->input->post('persiapan'),
+      "pelaksanaan" => $this->input->post('pelaksanaan'),
+      "lain_lain" => $this->input->post('lain_lain'),
     );
     $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_kendala");
 
@@ -1198,7 +1201,10 @@ class Kegiatan extends MY_Controller
   {
     $data = array(
       "id_kegiatan" => (int)$id,
-      "keterangan" => $this->input->post('solusi_kegiatan')
+      "publikasi" => $this->input->post('publikasi'),
+      "persiapan" => $this->input->post('persiapan'),
+      "pelaksanaan" => $this->input->post('pelaksanaan'),
+      "lain_lain" => $this->input->post('lain_lain'),
     );
     $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_solusi");
 
@@ -1216,7 +1222,10 @@ class Kegiatan extends MY_Controller
   {
     $data = array(
       "id_kegiatan" => (int)$id,
-      "keterangan" => $this->input->post('perbaikan_kegiatan')
+      "publikasi" => $this->input->post('publikasi'),
+      "persiapan" => $this->input->post('persiapan'),
+      "pelaksanaan" => $this->input->post('pelaksanaan'),
+      "lain_lain" => $this->input->post('lain_lain'),
     );
     $this->Kegiatan_model->add_instrumen($data, "xin_kegiatan_perbaikan");
 

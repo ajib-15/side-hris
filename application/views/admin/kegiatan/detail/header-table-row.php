@@ -15,63 +15,103 @@
     </th>
     <td> <!-- nama_kegiatan -->
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-      <textarea name="nama_kegiatan" id="nama_kegiatan" rows="2" class="form-control form-table" style="width: 225px!important;" required><?= $choosed_kegiatan[0]['nama'] ?></textarea>
+      <span data-toggle="tooltip" data-placement="top" title="Tuliskan nama kegiatan">
+        <textarea name="nama_kegiatan" id="nama_kegiatan" rows="2" class="form-control form-table" style="width: 225px!important;" required><?= $choosed_kegiatan[0]['nama'] ?></textarea>
+      </span>
     </td>
   </form>
   <!-- Strategi Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Strategi Literasi">LIT</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Strategi Diseminasi">DIS</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Strategi Institutiona Engagement">INE</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Strategi Literasi
+">LIT</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Strategi Diseminasi
+">DIS</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Strategi Institutiona Engagement
+">INE</span></th>
   <!-- Strategi End -->
   <!-- Kelompok Kegiatan Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kelompok Community Services">CS</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kelompok Community Representative">CR</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kelompok Community Development">CD</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kelompok Community Empowerment">CE</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kelompok Community Services (CS)
+">CS</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kelompok Community Representative (CR)
+">CR</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kelompok Community Development (CD)
+">CD</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kelompok Community Empowerment (CE)
+">CE</span></th>
   <!-- Kelompok Kegiatan End -->
   <!-- Fokus Kegiatan Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Fokus Peningkatan Kualitas Pendidikan di Masyarakat">EDU</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Fokus Pemberdayaan Ekonomi Masyarakat">ECO</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Fokus Peningkatan Kesehatan dan Kualitas Hidup">HQL</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Fokus Penguatan Kelembagaan di Masyarakat">IE</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Peningkatan Kualitas Pendidikan di Masyarakat (EDU)
+">EDU</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Pemberdayaan Ekonomi Masyarakat (ECO)
+">ECO</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Peningkatan Kesehatan dan Kualitas Hidup (HQL)
+">HQL</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam fokus Penguatan Kelembagaan di Masyarakat (IE)
+">IE</span></th>
   <!-- Fokus Kegiatan Start -->
   <!-- Platform Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Platform Ragawi">RG</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Platform Digital">DG</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Platform Hybrid">HY</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori platform Ragawi (RG)
+">RG</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Platform Digital (DG)
+">DG</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Hybrid (HY)
+">HY</span></th>
   <!-- Platform End -->
   <!-- 6 Literasi Dasar Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Baca dan Tulis">BT</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Numerasi">NU</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Sains">SA</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Digital">DI</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Finansial">FI</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Literasi Budaya dan Kewargaan">BK</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Baca dan Tulis (BT)
+">BT</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Numerasi (NU)
+">NU</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Sains (SA)
+">SA</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Digital (DI)
+">DI</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Finansial (FI)
+">FI</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori kegiatan literasi Budaya dan Kewargaan (BK)
+">BK</span></th>
   <!-- 6 Literasi Dasar End -->
   <!-- Inklusivitas Start -->
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Down Syndrome">DS</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Marginal">MR</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Grand Design">GD</span></th>
-  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Inklusivitas 3T (Terdepan, Terluar dan Tertinggal)">3T</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Inklusivitas Difabilitas Netra
+">DN</span></th> <!-- DS -->
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Inklusivitas Difabilitas Rungu
+">DR</span></th> <!-- MR -->
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Inklusivitas Difabilitas Lain
+">DL</span></th> <!-- GD -->
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Silahkan isi sesuai dengan petunjuk apabila mata acara termasuk dalam kategori Inklusivitas Terdepan, Terluar, Tertinggal
+">3T</span></th> <!-- 3T -->
   <!-- Inklusivitas End -->
   <!-- SDGS Start -->
-  <th rowspan="2">#1</th>
-  <th rowspan="2">#2</th>
-  <th rowspan="2">#3</th>
-  <th rowspan="2">#4</th>
-  <th rowspan="2">#5</th>
-  <th rowspan="2">#6</th>
-  <th rowspan="2">#7</th>
-  <th rowspan="2">#8</th>
-  <th rowspan="2">#9</th>
-  <th rowspan="2">#10</th>
-  <th rowspan="2">#11</th>
-  <th rowspan="2">#12</th>
-  <th rowspan="2">#13</th>
-  <th rowspan="2">#14</th>
-  <th rowspan="2">#15</th>
-  <th rowspan="2">#16</th>
-  <th rowspan="2">#17</th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Tanpa Kemiskinan
+">#1</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Tanpa Kelaparan
+">#2</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kehidupan Sehat dan Sejahtera">#3</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Pendidikan Berkualitas
+">#4</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kesetaraan Gender
+">#5</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Air Bersih dan Sanitasi Layak
+">#6</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Energi Bersih dan Terjangkau
+">#7</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Pekerjaan Layak dan Pertumbuhan Ekonomi
+">#8</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Industri, Inovasi dan Infrastruktur">#9</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Berkurangnya Kesenjangan
+">#10</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kota dan Permukiman yang Berkelanjutan
+">#11</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Konsumsi dan Produksi yang Bertanggung Jawab
+">#12</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Penanganan Perubahan Iklim
+">#13</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Ekosistem Lautan
+">#14</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Ekosistem Daratan
+">#15</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Perdamaian, Keadilan dan Kelembagaan yang Tangguh
+">#16</span></th>
+  <th rowspan="2"><span data-toggle="tooltip" data-placement="top" title="Kemitraan untuk mencapai tujuan">#17</span></th>
   <!-- SDGS End -->
 </tr>
 <tr>
@@ -81,7 +121,9 @@
     </th>
     <td> <!-- sub_heading -->
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-      <textarea name="sub_heading" id="sub_heading" rows="2" class="form-control form-table" style="width: 225px!important;" required><?= $choosed_kegiatan[0]['sub_heading'] ?></textarea>
+      <span data-toggle="tooltip" data-placement="top" title="Tuliskan kode subject heading kegiatan">
+        <textarea name="sub_heading" id="sub_heading" rows="2" class="form-control form-table" style="width: 225px!important;" required><?= $choosed_kegiatan[0]['sub_heading'] ?></textarea>
+      </span>
     </td>
   </form>
 </tr>

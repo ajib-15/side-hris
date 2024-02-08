@@ -42,7 +42,10 @@
             <span data-toggle="tooltip" data-placement="top" title="Hapus Baris Mata Acara Kegiatan Ini">
               <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_mata_acara/<?= $choosed_kegiatan[0]['id'] ?>/<?= $mata_acara['id'] ?>" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
             </span>
-            <textarea name="nama_mata_acara" id="nama_mata_acara" rows="2" class="form-control form-table" required><?= $mata_acara['nama_mata_acara'] ?></textarea>
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan Mata Acara Kegiatan
+">
+              <textarea name="nama_mata_acara" id="nama_mata_acara" rows="2" class="form-control form-table" required><?= $mata_acara['nama_mata_acara'] ?></textarea>
+            </span>
           </div>
         </td>
         <!-- Strategi Start -->
