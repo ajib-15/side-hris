@@ -299,6 +299,7 @@ if (!is_null($role_user)) {
 
       var currentDate = new Date();
       var currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
+      var currentYear = currentDate.getFullYear(); // Get the current month (0-indexed)
       var startMonth = currentMonth + 1; // Start month (1-indexed)
       var endMonth = startMonth + 5; // End month
 
@@ -311,7 +312,7 @@ if (!is_null($role_user)) {
         'July', 'August', 'September', 'October', 'November', 'December'
       ];
 
-      var chartTitle = "TOTAL PARTISIPAN";
+      var chartTitle = "TOTAL PARTISIPAN " + currentYear;
 
       $.ajax({
         url: site_url + 'dashboard/hrsale_payroll/',
