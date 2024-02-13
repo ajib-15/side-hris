@@ -37,15 +37,19 @@
 
 <div id="catatan" class="collapse add-formd animated fadeUp">
   <div class="ui-bordered px-4 pt-4 mb-4 mt-3">
-    <form action="<?= base_url() ?>admin/kegiatan/add_catatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST">
-      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+    <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
+      <form action="<?= base_url() ?>admin/kegiatan/add_catatan/<?= $choosed_kegiatan[0]['id'] ?>" autocomplete="off" class="add form-hrm" method="POST">
+        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+        <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
+        <div class="my-3 text-right">
+          <button type="submit" class="btn btn-secondary ladda-button" data-style="expand-right">
+            <span class="ladda-label"><i class="fas fa-check-square"></i> Simpan Catatan</span>
+            <span class="ladda-spinner"></span></button>
+        </div>
+      </form>
+    <?php else : ?>
       <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
-      <div class="my-3 text-right">
-        <button type="submit" class="btn btn-secondary ladda-button" data-style="expand-right">
-          <span class="ladda-label"><i class="fas fa-check-square"></i> Simpan Catatan</span>
-          <span class="ladda-spinner"></span></button>
-      </div>
-    </form>
+    <?php endif; ?>
   </div>
 </div>
 <div class="card">
@@ -71,14 +75,12 @@
       </a>
     </div>
     <div class="card-header-elements ml-md-auto align-items-center">
-      <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
-        <a class="text-dark collapsed" data-toggle="collapse" href="#catatan" aria-expanded="false">
-          <button type="button" class="btn btn-md btn-info">
-            <span class="ion ion-ios-document"></span>
-            Catatan
-          </button>
-        </a>
-      <?php endif; ?>
+      <a class="text-dark collapsed" data-toggle="collapse" href="#catatan" aria-expanded="false">
+        <button type="button" class="btn btn-md btn-info">
+          <span class="ion ion-ios-document"></span>
+          Catatan
+        </button>
+      </a>
 
       <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
         <div>
