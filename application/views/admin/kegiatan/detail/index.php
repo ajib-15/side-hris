@@ -13,7 +13,7 @@
 
   td,
   th {
-    border: 2px solid grey !important;
+    border: 1px solid grey !important;
   }
 
   .flex-with-save {
@@ -22,6 +22,7 @@
   }
 
   .datatables-demo,
+  input,
   .table {
     font-size: 10px !important;
   }
@@ -48,7 +49,7 @@
         </div>
       </form>
     <?php else : ?>
-      <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
+      <textarea name="catatan_kegiatan" id="catatan_kegiatan" cols="30" rows="5" class="form-control" required disabled><?= $choosed_kegiatan[0]['catatan'] ?></textarea>
     <?php endif; ?>
   </div>
 </div>
@@ -119,171 +120,161 @@
           <!-- Tema -->
           <form action="<?= base_url() ?>admin/kegiatan/update_tema/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-            <th>Tema Kegiatan<span data-toggle="tooltip" data-placement="top" title="Simpan Tema Kegiatan"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
-            <td colspan="7">
-              <span data-toggle="tooltip" data-placement="top" title="Tuliskan Tema Kegiatan"><textarea name="tema_kegiatan" id="tema_kegiatan" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['tema'] ?></textarea></span>
+            <th style="background: ghostwhite;" colspan="2">Tema Kegiatan&nbsp;<span data-toggle="tooltip" data-placement="top" title="Simpan Tema Kegiatan"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
+            <td colspan="20">
+              <span style="width: 100%;" data-toggle="tooltip" data-placement="top" title="Tuliskan Tema Kegiatan"><input type="text" style="width: 100%;!important" name="tema_kegiatan" id="tema_kegiatan" rows="2" class="form-control" required value="<?= $choosed_kegiatan[0]['tema'] ?>"></span>
             </td>
           </form>
           <!-- Tema -->
-          <!-- Penanggung Jawab -->
-          <form action="<?= base_url() ?>admin/kegiatan/update_pj/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-            <th>Penanggung Jawab<span data-toggle="tooltip" data-placement="top" title="Simpan Penanggung Jawab"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
-            <td colspan="12"><span data-toggle="tooltip" data-placement="top" title="Tuliskan Penanggung Jawab"><textarea name="penanggung_jawab" id="penanggung_jawab" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['penanggung_jawab'] ?></textarea></span></td>
-          </form>
-          <!-- Penanggung Jawab -->
-          <!-- Pendamping -->
-          <form action="<?= base_url() ?>admin/kegiatan/update_pendamping/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-            <th>Pendamping<span data-toggle="tooltip" data-placement="top" title="Simpan Pendamping Jawab"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
-            <td colspan="12"><span data-toggle="tooltip" data-placement="top" title="Tuliskan Pendamping"><textarea name="pendamping" id="pendamping" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['pendamping'] ?></textarea></span></td>
-          </form>
-          <!-- Pendamping -->
           <!-- Lain-Lain -->
           <form action="<?= base_url() ?>admin/kegiatan/update_lain_lain/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-            <th>Lain-Lain<span data-toggle="tooltip" data-placement="top" title="Simpan Lain-Lain"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
-            <td colspan="8"><span data-toggle="tooltip" data-placement="top" title="Tuliskan Lain Lain"><textarea name="lain_lain" id="lain_lain" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lain_lain'] ?></textarea></span></td>
+            <th colspan="2" style="background: ghostwhite;">Lain-Lain&nbsp;<span data-toggle="tooltip" data-placement="top" title="Simpan Lain-Lain"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
+            <td colspan="21"><span style="width: 100%;" data-toggle="tooltip" data-placement="top" title="Tuliskan Lain Lain"><input type="text" style="width: 100%;" name="lain_lain" id="lain_lain" rows="2" class="form-control" required value="<?= $choosed_kegiatan[0]['lain_lain'] ?>"></span></td>
           </form>
           <!-- Lain-Lain -->
         </tr>
         <tr>
           <!-- Momentum -->
-          <th rowspan="3">Momentum
+          <th rowspan="3" style="background: ghostwhite;">Momentum
             <span data-toggle="tooltip" data-placement="top" title="Simpan Momentum">
               <button class="btn btn-xs btn-success saveMomentum"><i class="fas fa-check"></i></button>
             </span>
           </th>
-          <th>Angka Digit Tanggal</th>
+          <th style="background: ghostwhite;">Angka Digit Tanggal</th>
           <td colspan="6">
             <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan tanggal pada hari tersebut:  01, 02 dst">
-              <input class="form-control" type="text" name="momentum_tgl" id="momentum_tgl" value="<?= $choosed_kegiatan[0]['momentum_tgl'] ?>" required>
+              <input class="form-control" type="number" name="momentum_tgl" id="momentum_tgl" value="<?= $choosed_kegiatan[0]['momentum_tgl'] ?>" required>
             </span>
           </td>
           <!-- Momentum -->
           <!-- Hari-Tgl -->
-          <th rowspan="3">Hari/Tanggal<span data-toggle="tooltip" data-placement="top" title="Simpan Hari/Tanggal"><button class="btn btn-xs btn-success saveHT"><i class="fas fa-check"></i></button></span></th>
-          <th colspan="6">3 Huruf Hari</th>
-          <th colspan="6">2 Digit Tanggal</th>
-          <th colspan="6">2 Digit Bulan</th>
-          <th colspan="6">2 Digit Tahun</th>
+          <th rowspan="3" colspan="2" style="background: ghostwhite;">Hari/Tanggal & Durasi <span data-toggle="tooltip" data-placement="top" title="Simpan Hari/Tanggal & Durasi"><button class="btn btn-xs btn-success saveHT"><i class="fas fa-check"></i></button></span></th>
+          <th rowspan="2" colspan="6" style="background: ghostwhite;">3 Huruf Hari</th>
+          <th rowspan="2" colspan="6" style="background: ghostwhite;">2 Digit Tanggal</th>
+          <th rowspan="2" colspan="6" style="background: ghostwhite;">2 Digit Bulan</th>
+          <th rowspan="2" colspan="6" style="background: ghostwhite;">2 Digit Tahun</th>
           <!-- Hari-Tgl -->
           <!-- Durasi -->
-          <th colspan="5">Jumlah Angka Jam</th>
-          <th colspan="5">Jumlah Angka Menit</th>
+          <th colspan="11" style="background: ghostwhite;">Durasi</th>
           <!-- Durasi -->
         </tr>
         <tr>
           <!-- Momentum -->
-          <th>Angka Digit Bulan</th>
+          <th style="background: ghostwhite;">Angka Digit Bulan</th>
           <td colspan="6">
             <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan dua digit bulan pada hari tersebut: 22, 23, dst">
-              <input class="form-control" type="text" name="momentum_bln" id="momentum_bln" value="<?= $choosed_kegiatan[0]['momentum_bln'] ?>" required>
+              <input class="form-control" type="number" name="momentum_bln" id="momentum_bln" value="<?= $choosed_kegiatan[0]['momentum_bln'] ?>" required>
             </span>
           </td>
           <!-- Momentum -->
-          <!-- Hari-Tgl -->
-          <td colspan="6" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan hari pelaksanaan kegiatan dengan 3 (tiga) digit huruf pertama hari tersebut: SEN, SEL, RAB, KAM, JUM, SAB, MIN">
-              <input class="form-control" type="text" name="ht_huruf_hari" id="ht_huruf_hari" value="<?= $choosed_kegiatan[0]['ht_huruf_hari'] ?>" required>
-            </span>
-          </td>
-          <td colspan="6" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan tanggal pada hari tersebut: 01, 02, dst">
-              <input class="form-control" type="text" name="ht_digit_tanggal" id="ht_digit_tanggal" value="<?= $choosed_kegiatan[0]['ht_digit_tanggal'] ?>" required>
-            </span>
-          </td>
-          <td colspan="6" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan bulan pada hari tersebut: 01, 02, dst">
-              <input class="form-control" type="text" name="ht_digit_bulan" id="ht_digit_bulan" value="<?= $choosed_kegiatan[0]['ht_digit_bulan'] ?>" required>
-            </span>
-          </td>
-          <td colspan="6" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan dua digit terakhir tahun pada hari tersebut: 22, 23, dst">
-              <input class="form-control" type="text" name="ht_digit_tahun" id="ht_digit_tahun" value="<?= $choosed_kegiatan[0]['ht_digit_tahun'] ?>" required>
-            </span>
-          </td>
-          <!-- Hari-Tgl -->
           <!-- Durasi -->
-          <td colspan="5" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan keterangan jumlah jam pelaksanaan kegiatan">
-              <input class="form-control" type="text" name="ht_digit_jam" id="ht_digit_jam" value="<?= $choosed_kegiatan[0]['ht_digit_jam'] ?>" required>
-            </span>
-          </td>
-          <td colspan="5" rowspan="2">
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan keterangan jumlah menit pelaksanaan kegiatan">
-              <input class="form-control" type="text" name="ht_digit_menit" id="ht_digit_menit" value="<?= $choosed_kegiatan[0]['ht_digit_menit'] ?>" required>
-            </span>
-          </td>
           <!-- Durasi -->
+          <th colspan="6" style="background: ghostwhite;">Jumlah Angka Jam</th>
+          <th colspan="5" style="background: ghostwhite;">Jumlah Angka Menit</th>
         </tr>
         <tr>
           <!-- Momentum -->
-          <th>Jenis Momentum</th>
+          <th style="background: ghostwhite;">Jenis Momentum</th>
           <td colspan="6">
             <span data-toggle="tooltip" data-placement="top" title="Tuliskan Jenis momentum kegiatan tersebut.">
               <input class="form-control" type="text" name="momentum_jenis" id="momentum_jenis" value="<?= $choosed_kegiatan[0]['momentum_jenis'] ?>" required>
             </span>
           </td>
           <!-- Momentum -->
+          <!-- Hari-Tgl -->
+          <td colspan="6">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan hari pelaksanaan kegiatan dengan 3 (tiga) digit huruf pertama hari tersebut: SEN, SEL, RAB, KAM, JUM, SAB, MIN">
+              <input class="form-control" type="text" name="ht_huruf_hari" id="ht_huruf_hari" value="<?= $choosed_kegiatan[0]['ht_huruf_hari'] ?>" required>
+            </span>
+          </td>
+          <td colspan="6">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan tanggal pada hari tersebut: 01, 02, dst">
+              <input class="form-control" type="number" name="ht_digit_tanggal" id="ht_digit_tanggal" value="<?= $choosed_kegiatan[0]['ht_digit_tanggal'] ?>" required>
+            </span>
+          </td>
+          <td colspan="6">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan bulan pada hari tersebut: 01, 02, dst">
+              <input class="form-control" type="number" name="ht_digit_bulan" id="ht_digit_bulan" value="<?= $choosed_kegiatan[0]['ht_digit_bulan'] ?>" required>
+            </span>
+          </td>
+          <td colspan="6">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan dua digit terakhir tahun pada hari tersebut: 22, 23, dst">
+              <input class="form-control" type="number" name="ht_digit_tahun" id="ht_digit_tahun" value="<?= $choosed_kegiatan[0]['ht_digit_tahun'] ?>" required>
+            </span>
+          </td>
+          <!-- Hari-Tgl -->
+          <td colspan="6">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan keterangan jumlah jam pelaksanaan kegiatan">
+              <input class="form-control" type="number" name="ht_digit_jam" id="ht_digit_jam" value="<?= $choosed_kegiatan[0]['ht_digit_jam'] ?>" required>
+            </span>
+          </td>
+          <td colspan="5">
+            <span data-toggle="tooltip" data-placement="top" title="Tuliskan angka yang menunjukkan keterangan jumlah menit pelaksanaan kegiatan">
+              <input class="form-control" type="number" name="ht_digit_menit" id="ht_digit_menit" value="<?= $choosed_kegiatan[0]['ht_digit_menit'] ?>" required>
+            </span>
+          </td>
         </tr>
         <tr>
-          <th rowspan="3">Inisiasi</th>
-          <th>RBA</th>
+          <th rowspan="3" style="background: ghostwhite;">Inisiasi</th>
+          <th style="background: ghostwhite;">RBA</th>
           <td colspan="6">
             <form class="inisiasiForm" action="<?= base_url() ?>admin/kegiatan/update_inisiasi_rba/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
               <input type="checkbox" name="inisiasi_rba" class="form-control form-table mx-auto inisiasiCheckbox" value="true" <?= $choosed_kegiatan[0]['inisiasi_rba'] ? 'checked' : "" ?>>
             </form>
           </td>
-          <th colspan="21">Lokasi<span data-toggle="tooltip" data-placement="top" title="Simpan Lokasi"><button class="btn btn-xs btn-success mx-2 saveLokasi"><i class="fas fa-check"></i></button></span></th>
-          <th colspan="4">Lokasi Jarak</th>
-          <td colspan="10">
-            <textarea name="lokasi_jarak" id="lokasi_jarak" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lokasi_jarak'] ?></textarea>
+          <th colspan="20" style="background: ghostwhite;">Lokasi<span data-toggle="tooltip" data-placement="top" title="Simpan Lokasi"><button class="btn btn-xs btn-success mx-2 saveLokasi"><i class="fas fa-check"></i></button></span></th>
+          <th colspan="6" style="background: ghostwhite;">Lokasi Jarak</th>
+          <td colspan="11">
+            <div class="input-group" style="width: 30%;">
+              <input type="text" name="lokasi_jarak" id="lokasi_jarak" rows="2" class="form-control" required value="<?= $choosed_kegiatan[0]['lokasi_jarak'] ?>">
+              <div class="input-group-append"> <span class="input-group-text" style="font-size: smaller;">KM</span> </div>
+            </div>
           </td>
         </tr>
         <tr>
-          <th>Kolaborator</th>
+          <th style="background: ghostwhite;">Kolaborator</th>
           <td colspan="6">
             <form class="inisiasiForm" action="<?= base_url() ?>admin/kegiatan/update_inisiasi_kolaborator/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
               <input type="checkbox" name="inisiasi_kolaborator" class="form-control form-table mx-auto inisiasiCheckbox" value="true" <?= $choosed_kegiatan[0]['inisiasi_kolaborator'] ? 'checked' : "" ?>>
             </form>
           </td>
-          <th>Lokasi Kegiatan</th>
-          <td colspan="20"><textarea name="lokasi_kegiatan" id="lokasi_kegiatan" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lokasi_kegiatan'] ?></textarea></td>
-          <th colspan="4">Lokasi IH</th>
-          <td colspan="10">
+          <th colspan="2" style="background: ghostwhite;">Lokasi Kegiatan</th>
+          <td colspan="18"><textarea name="lokasi_kegiatan" id="lokasi_kegiatan" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lokasi_kegiatan'] ?></textarea></td>
+          <th colspan="6" style="background: ghostwhite;">Lokasi IH</th>
+          <td colspan="11">
             <input type="checkbox" name="lokasi_ih" id="lokasi_ih" class="form-control form-table mx-auto" value="true" <?= $choosed_kegiatan[0]['lokasi_ih'] ? 'checked' : "" ?>>
           </td>
         </tr>
         <tr>
-          <th>Mitra</th>
+          <th style="background: ghostwhite;">Mitra</th>
           <td colspan="6">
             <form class="inisiasiForm" action="<?= base_url() ?>admin/kegiatan/update_inisiasi_mitra/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
               <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
               <input type="checkbox" name="inisiasi_mitra" class="form-control form-table mx-auto inisiasiCheckbox" value="true" <?= $choosed_kegiatan[0]['inisiasi_mitra'] ? 'checked' : "" ?>>
             </form>
           </td>
-          <th>Lokasi Digital</th>
-          <td colspan="20"><textarea name="lokasi_digital" id="lokasi_digital" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lokasi_digital'] ?></textarea></td>
-          <th colspan="4">Lokasi OR</th>
-          <td colspan="10">
+          <th colspan="2" style="background: ghostwhite;">Lokasi Digital</th>
+          <td colspan="18"><textarea name="lokasi_digital" id="lokasi_digital" rows="2" class="form-control" required><?= $choosed_kegiatan[0]['lokasi_digital'] ?></textarea></td>
+          <th colspan="6" style="background: ghostwhite;">Lokasi OR</th>
+          <td colspan="11">
             <input type="checkbox" name="lokasi_or" id="lokasi_or" class="form-control form-table mx-auto" value="true" <?= $choosed_kegiatan[0]['lokasi_or'] ? 'checked' : "" ?>>
           </td>
         </tr>
         <tr>
-          <th colspan="2">
+          <th colspan="2" style="background: ghostwhite;">
             Catatan
           </th>
-          <th rowspan="2">Aksi</th>
-          <th colspan="10" rowspan="2">Publikasi & Diseminasi</th>
-          <th colspan="10" rowspan="2">Persiapan Kegiatan</th>
-          <th colspan="10" rowspan="2">Pelaksaan Kegiatan</th>
-          <th colspan="10" rowspan="2">Lain-Lain</th>
+          <th style="background: ghostwhite;">Aksi</th>
+          <th colspan="10" style="background: ghostwhite;">Publikasi & Diseminasi</th>
+          <th colspan="11" style="background: ghostwhite;">Persiapan Kegiatan</th>
+          <th colspan="10" style="background: ghostwhite;">Pelaksaan Kegiatan</th>
+          <th colspan="11" style="background: ghostwhite;">Lain-Lain</th>
         </tr>
         <tr>
-          <th colspan="2" <?= count($kegiatan["kendala"]) > 0 ? 'rowspan="' . count($kegiatan["kendala"]) + 1 . '"' : '' ?>>Kendala
+          <th style="background: ghostwhite;" colspan="2" <?= count($kegiatan["kendala"]) > 0 ? 'rowspan="' . count($kegiatan["kendala"]) + 1 . '"' : '' ?>>Kendala
             <span data-toggle="tooltip" data-placement="top" title="Tambah Kendala"><button class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-kendala"><i class="fas fa-plus"></i></button></span>
             <div class="modal fadeInRight add-modal-kendala animated" role="dialog" aria-labelledby="add-modal-kendala" aria-hidden="true">
               <div class="modal-dialog modal-lg">
@@ -331,15 +322,15 @@
                   <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_kendala/<?= $choosed_kegiatan[0]['id'] ?>/<?= $kendala['id'] ?>" class="btn btn-xs btn-danger mr-3"><i class="fas fa-trash"></i></a></span>
               </td>
               <td colspan="10"><?= $no_kendala . ". " . $kendala['publikasi'] ?></td>
-              <td colspan="10"><?= $no_kendala . ". " . $kendala['persiapan'] ?></td>
+              <td colspan="11"><?= $no_kendala . ". " . $kendala['persiapan'] ?></td>
               <td colspan="10"><?= $no_kendala . ". " . $kendala['pelaksanaan'] ?></td>
-              <td colspan="10"><?= $no_kendala . ". " . $kendala['lain_lain'] ?></td>
+              <td colspan="11"><?= $no_kendala . ". " . $kendala['lain_lain'] ?></td>
             </tr>
           <?php $no_kendala++;
           endforeach;  ?>
         <?php endif; ?>
         <tr>
-          <th colspan="2" <?= count($kegiatan["solusi"]) > 0 ? 'rowspan="' . count($kegiatan["solusi"]) + 1 . '"' : '' ?>>Solusi
+          <th style="background: ghostwhite;" colspan="2" <?= count($kegiatan["solusi"]) > 0 ? 'rowspan="' . count($kegiatan["solusi"]) + 1 . '"' : '' ?>>Solusi
             <span data-toggle="tooltip" data-placement="top" title="Tambah Solusi"><button class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-solusi"><i class="fas fa-plus"></i></button></span>
             <div class="modal fadeInRight add-modal-solusi animated" role="dialog" aria-labelledby="add-modal-solusi" aria-hidden="true">
               <div class="modal-dialog modal-lg">
@@ -387,15 +378,15 @@
                   <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_solusi/<?= $choosed_kegiatan[0]['id'] ?>/<?= $solusi['id'] ?>" class="btn btn-xs btn-danger mr-3"><i class="fas fa-trash"></i></a></span>
               </td>
               <td colspan="10"><?= $no_solusi . ". " . $solusi['publikasi'] ?></td>
-              <td colspan="10"><?= $no_solusi . ". " . $solusi['persiapan'] ?></td>
+              <td colspan="11"><?= $no_solusi . ". " . $solusi['persiapan'] ?></td>
               <td colspan="10"><?= $no_solusi . ". " . $solusi['pelaksanaan'] ?></td>
-              <td colspan="10"><?= $no_solusi . ". " . $solusi['lain_lain'] ?></td>
+              <td colspan="11"><?= $no_solusi . ". " . $solusi['lain_lain'] ?></td>
             </tr>
           <?php $no_solusi++;
           endforeach;  ?>
         <?php endif; ?>
         <tr>
-          <th colspan="2" <?= count($kegiatan["perbaikan"]) > 0 ? 'rowspan="' . count($kegiatan["perbaikan"]) + 1 . '"' : '' ?>>Perbaikan
+          <th style="background: ghostwhite;" colspan="2" <?= count($kegiatan["perbaikan"]) > 0 ? 'rowspan="' . count($kegiatan["perbaikan"]) + 1 . '"' : '' ?>>Perbaikan
             <span data-toggle="tooltip" data-placement="top" title="Tambah Perbaikan"><button class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-perbaikan"><i class="fas fa-plus"></i></button></span>
             <div class="modal fadeInRight add-modal-perbaikan animated" role="dialog" aria-labelledby="add-modal-perbaikan" aria-hidden="true">
               <div class="modal-dialog modal-lg">
@@ -443,15 +434,31 @@
                   <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_perbaikan/<?= $choosed_kegiatan[0]['id'] ?>/<?= $perbaikan['id'] ?>" class="btn btn-xs btn-danger mr-3"><i class="fas fa-trash"></i></a></span>
               </td>
               <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['publikasi'] ?></td>
-              <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['persiapan'] ?></td>
+              <td colspan="11"><?= $no_perbaikan . ". " . $perbaikan['persiapan'] ?></td>
               <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['pelaksanaan'] ?></td>
-              <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['lain_lain'] ?></td>
+              <td colspan="11"><?= $no_perbaikan . ". " . $perbaikan['lain_lain'] ?></td>
             </tr>
           <?php $no_perbaikan++;
           endforeach;  ?>
         <?php endif; ?>
         <?php include('kolaborator-table-row.php') ?>
         <?php include('partisipan-table-row.php') ?>
+        <tr>
+          <!-- Penanggung Jawab -->
+          <form action="<?= base_url() ?>admin/kegiatan/update_pj/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+            <th colspan="3" style="background: ghostwhite;">Penanggung Jawab&nbsp;<span data-toggle="tooltip" data-placement="top" title="Simpan Penanggung Jawab"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
+            <td colspan="14"><span style="width: 100%;" data-toggle="tooltip" data-placement="top" title="Tuliskan Penanggung Jawab"><input type="text" style="width: 100%;" name="penanggung_jawab" id="penanggung_jawab" rows="2" class="form-control" required value="<?= $choosed_kegiatan[0]['penanggung_jawab'] ?>"></span></td>
+          </form>
+          <!-- Penanggung Jawab -->
+          <!-- Pendamping -->
+          <form action="<?= base_url() ?>admin/kegiatan/update_pendamping/<?= $choosed_kegiatan[0]['id'] ?>" method="post" autocomplete="off">
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+            <th colspan="2" style="background: ghostwhite;">Pendamping&nbsp;<span data-toggle="tooltip" data-placement="top" title="Simpan Pendamping Jawab"><button class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span></th>
+            <td colspan="26"><span style="width: 100%;" data-toggle="tooltip" data-placement="top" title="Tuliskan Pendamping"><input type="text" style="width: 100%;" name="pendamping" id="pendamping" rows="2" class="form-control" required value="<?= $choosed_kegiatan[0]['pendamping'] ?>"></span></td>
+          </form>
+          <!-- Pendamping -->
+        </tr>
       </table>
     </div>
   </div>
@@ -464,13 +471,13 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Total Strategi</th>
-          <th>Total Kelompok Kegiatan</th>
-          <th>Total Platform</th>
-          <th>Total S1/S2/S3</th>
-          <th>Berdasarkan Peran</th>
-          <th>Berdasarkan Gender</th>
-          <th>Berdasarkan Usia</th>
+          <th style="background: ghostwhite;">Total Strategi</th>
+          <th style="background: ghostwhite;">Total Kelompok Kegiatan</th>
+          <th style="background: ghostwhite;">Total Platform</th>
+          <th style="background: ghostwhite;">Total S1/S2/S3</th>
+          <th style="background: ghostwhite;">Berdasarkan Peran</th>
+          <th style="background: ghostwhite;">Berdasarkan Gender</th>
+          <th style="background: ghostwhite;">Berdasarkan Usia</th>
         </tr>
         <tr>
           <td class="text-center"><?= $kegiatan['total_strategi'] ?></td>
@@ -494,7 +501,7 @@
           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
           <table class="table table-bordered">
             <thead>
-              <tr>
+              <tr style="background: ghostwhite;">
                 <th colspan="2">
                   Validasi
                   <span data-toggle="tooltip" data-placement="top" title="Simpan Validasi"><button type="submit" class="btn btn-xs btn-success"><i class="fas fa-check"></i></button></span>
@@ -502,7 +509,7 @@
               </tr>
             </thead>
             <tr>
-              <th>Nama Penanggung Jawab</th>
+              <th style="background: ghostwhite;">Nama Penanggung Jawab</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan nama lengkap Penanggung Jawab Kegiatan">
                   <input class="form-control" type="text" name="validasi_nama_pj" value="<?= $choosed_kegiatan[0]['validasi_nama_pj'] ?>" placeholder="Nama Penanggung Jawab" required>
@@ -510,7 +517,7 @@
               </td>
             </tr>
             <tr>
-              <th>Nomor Kontak</th>
+              <th style="background: ghostwhite;">Nomor Kontak</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan nomor kontak PJ">
                   <input class="form-control" type="text" name="validasi_no_kontak" value="<?= $choosed_kegiatan[0]['validasi_no_kontak'] ?>" placeholder="Nomor Kontak" required>
@@ -518,7 +525,7 @@
               </td>
             </tr>
             <tr>
-              <th>Alamat User</th>
+              <th style="background: ghostwhite;">Alamat User</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan alamat surel PJ">
                   <input class="form-control" type="text" name="validasi_alamat_surel" value="<?= $choosed_kegiatan[0]['validasi_alamat_surel'] ?>" placeholder="Alamat User" required>
@@ -526,7 +533,7 @@
               </td>
             </tr>
             <tr>
-              <th>Nama User</th>
+              <th style="background: ghostwhite;">Nama User</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan nama lengkap User">
                   <input class="form-control" type="text" name="validasi_nama_user" value="<?= $choosed_kegiatan[0]['validasi_nama_user'] ?>" placeholder="Nama User" required>
@@ -534,7 +541,7 @@
               </td>
             </tr>
             <tr>
-              <th>Penempatan</th>
+              <th style="background: ghostwhite;">Penempatan</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tulis nama penempatan">
                   <input class="form-control" type="text" name="validasi_penempatan" value="<?= $choosed_kegiatan[0]['validasi_penempatan'] ?>" placeholder="Penempatan" required>
@@ -549,7 +556,7 @@
           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
           <table class="table table-bordered">
             <thead>
-              <tr>
+              <tr style="background: ghostwhite;">
                 <th colspan="2">
                   Verifikator
                   <?php if ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") : ?>
@@ -559,7 +566,7 @@
               </tr>
             </thead>
             <tr>
-              <th>Nama</th>
+              <th style="background: ghostwhite;">Nama</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tulis nama verifikator">
                   <select class="form-control" name="verifikator_nama" id="verifikator_nama" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
@@ -573,7 +580,7 @@
               </td>
             </tr>
             <tr>
-              <th>Nomor Kontak</th>
+              <th style="background: ghostwhite;">Nomor Kontak</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan nomor kontak Verifikator">
                   <input class="form-control" type="text" name="verifikator_no_kontak" value="<?= $choosed_kegiatan[0]['verifikator_no_kontak'] ?>" placeholder="Nomor Kontak" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
@@ -581,7 +588,7 @@
               </td>
             </tr>
             <tr>
-              <th>Alamat User</th>
+              <th style="background: ghostwhite;">Alamat User</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan alamat surel verifikator">
                   <input class="form-control" type="text" name="verifikator_alamat_surel" value="<?= $choosed_kegiatan[0]['verifikator_alamat_surel'] ?>" placeholder="Alamat User" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>
@@ -589,7 +596,7 @@
               </td>
             </tr>
             <tr>
-              <th>Jabatan</th>
+              <th style="background: ghostwhite;">Jabatan</th>
               <td>
                 <span data-toggle="tooltip" data-placement="top" title="Tuliskan jabatan Verifikator">
                   <input class="form-control" type="text" name="verifikator_jabatan" value="<?= $choosed_kegiatan[0]['verifikator_jabatan'] ?>" placeholder="Jabatan" required <?= ($data_user[0]->user_role_id == "1" || $data_user[0]->user_role_id == "3") ? '' : 'disabled' ?>>

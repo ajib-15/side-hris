@@ -185,7 +185,7 @@ class Kegiatan extends MY_Controller
       $totalPartisipanNarasumber += (int) $item['partisipan_narasumber'];
       $totalPartisipanPanitia += (int) $item['partisipan_panitia'];
       $totalPartisipanLaki += (int) $item['partisipan_laki'];
-      $totalPartisipanLaki += (int) $item['partisipan_perempuan'];
+      $totalPartisipanPerempuan += (int) $item['partisipan_perempuan'];
       $totalPartisipan0_6 += (int) $item['partisipan_0_6'];
       $totalPartisipan7_12 += (int) $item['partisipan_7_12'];
       $totalPartisipan13_17 += (int) $item['partisipan_13_17'];
@@ -883,7 +883,7 @@ class Kegiatan extends MY_Controller
     $data['total_sektor'] = $sektor_pertama + $sektor_dua + $sektor_tiga;
 
     // Total Berdasarkan Peran
-    $data['total_peran'] = (int)$data['partisipan_peserta'] + (int)$data['partisipan_penampil'] + (int)$data['partisipan_fasilitator'] + (int)$data['partisipan_narasumber'] + (int)$data['partisipan_peserta'];
+    $data['total_peran'] = (int)$data['partisipan_peserta'] + (int)$data['partisipan_penampil'] + (int)$data['partisipan_fasilitator'] + (int)$data['partisipan_narasumber'] + (int)$data['partisipan_panitia'];
     // Total Berdasarkan Gender
     $data['total_gender'] = (int)$data['partisipan_laki'] + (int)$data['partisipan_perempuan'];
     // Total Berdasarkan usia

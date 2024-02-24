@@ -1,6 +1,6 @@
 <!-- Start Looping -->
 <tr>
-  <th colspan="43">Tujuan Kegiatan
+  <th colspan="45" style="background: ghostwhite;">Tujuan Kegiatan
     <span data-toggle="tooltip" data-placement="top" title="Tambah Tujuan Kegiatan"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-tujuan"><i class="fas fa-plus"></i></button></span>
     <!-- Modal Add Tujuan Acara -->
     <div class="modal fadeInRight add-modal-tujuan animated" role="dialog" aria-labelledby="add-modal-tujuan" aria-hidden="true">
@@ -32,7 +32,7 @@
   <?php $no_tujuan = 1;
   foreach ($kegiatan["tujuan"] as $tujuan) : ?>
     <tr>
-      <td colspan="43">
+      <td colspan="45">
         <span data-toggle="tooltip" data-placement="top" title="Hapus Baris Tujuan Kegiatan Ini">
           <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_tujuan/<?= $choosed_kegiatan[0]['id'] ?>/<?= $tujuan['id'] ?>" class="btn btn-xs btn-danger mr-3"><i class="fas fa-trash"></i></a>
         </span>

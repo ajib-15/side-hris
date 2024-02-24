@@ -1,5 +1,5 @@
 <tr>
-  <th colspan="43">Kolaborator dan/atau Mitra
+  <th colspan="45" style="background: ghostwhite;">Kolaborator dan/atau Mitra
     <span data-toggle="tooltip" data-placement="top" title="Tambah Kolaborator dan/atau Mitra"><button class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-kolaborator"><i class="fas fa-plus"></i></button></span>
     <!-- Modal Add Kolaborator -->
     <div class="modal fadeInRight add-modal-kolaborator animated" role="dialog" aria-labelledby="add-modal-kolaborator" aria-hidden="true">
@@ -27,13 +27,13 @@
   </th> <!-- rowspan dinamis -->
 </tr>
 <tr>
-  <th>Aksi</th>
-  <th colspan="20">Nama Kolaborator dan/atau Mitra</th>
-  <th colspan="5">Sektor Pertama</th>
-  <th colspan="5">Sektor Kedua</th>
-  <th colspan="4">Sektor Ketiga</th>
-  <th colspan="4">New</th>
-  <th colspan="4">MoU</th>
+  <th style="background: ghostwhite;">Aksi</th>
+  <th style="background: ghostwhite;" colspan="20">Nama Kolaborator dan/atau Mitra</th>
+  <th style="background: ghostwhite;" colspan="5">Sektor Pertama</th>
+  <th style="background: ghostwhite;" colspan="5">Sektor Kedua</th>
+  <th style="background: ghostwhite;" colspan="5">Sektor Ketiga</th>
+  <th style="background: ghostwhite;" colspan="5">New</th>
+  <th style="background: ghostwhite;" colspan="4">MoU</th>
 </tr>
 
 <?php if (count($kegiatan["kolaborator"]) > 0) : ?>
@@ -57,13 +57,13 @@
           <input type="checkbox" name="sektor_dua" class="form-control form-table mx-auto sektorDuaCheckbox" value="true" <?= $kolaborator['sektor_dua'] ? 'checked' : "" ?>>
         </form>
       </td>
-      <td colspan="4">
+      <td colspan="5">
         <form class="sektorTigaForm" action="<?= base_url() ?>admin/kegiatan/update_sektor_tiga/<?= $choosed_kegiatan[0]['id'] ?>/<?= $kolaborator['id'] ?>" method="post" autocomplete="off">
           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
           <input type="checkbox" name="sektor_tiga" class="form-control form-table mx-auto sektorTigaCheckbox" value="true" <?= $kolaborator['sektor_tiga'] ? 'checked' : "" ?>>
         </form>
       </td>
-      <td colspan="4">
+      <td colspan="5">
         <form class="mitraBaruForm" action="<?= base_url() ?>admin/kegiatan/update_mitra_baru/<?= $choosed_kegiatan[0]['id'] ?>/<?= $kolaborator['id'] ?>" method="post" autocomplete="off">
           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
           <input type="checkbox" name="mitra_baru" class="form-control form-table mx-auto mitraBaruCheckbox" value="true" <?= $kolaborator['mitra_baru'] ? 'checked' : "" ?>>

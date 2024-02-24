@@ -173,8 +173,7 @@ if (!is_null($role_user)) {
 
     function generateLabelsForPast12Months() {
       var currentDate = new Date();
-      var currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
-
+      var currentYear = currentDate.getFullYear(); // Get the current year
       var monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
@@ -182,11 +181,12 @@ if (!is_null($role_user)) {
 
       var labels = [];
       for (var i = 11; i >= 0; i--) {
-        var monthIndex = (currentMonth - i + 12) % 12; // Calculate the past month index
-        labels.push(monthNames[monthIndex]);
+        var monthIndex = (currentDate.getMonth() - i + 12) % 12; // Calculate the past month index
+        labels.push(monthNames[monthIndex] + ' ' + (currentYear - Math.floor((11 - i) / 12)));
       }
 
-      return labels;
+      return monthNames;
+
     }
 
 

@@ -31,6 +31,10 @@ $theme = $this->Xin_model->read_theme_info(1);
   .invalid-kegiatan {
     background-color: #ffd9d9 !important;
   }
+
+  .waiting-kegiatan {
+    background-color: #89ff8e !important;
+  }
 </style>
 <div class="card mb-4">
   <div id="accordion">
@@ -183,7 +187,7 @@ $theme = $this->Xin_model->read_theme_info(1);
     <div class="box-datatable table-responsive">
       <table class="datatables-demo table table-striped table-bordered kegiatan_table">
         <thead>
-          <tr>
+          <tr style="background: aliceblue;">
             <th rowspan="2">No</th>
             <th rowspan="2">CH<input type="checkbox" id="selectAllCheckBox"></th>
             <th rowspan="2">Kode Kegiatan</th>
@@ -200,7 +204,7 @@ $theme = $this->Xin_model->read_theme_info(1);
             <th colspan="4">Inklusivitas</th>
             <th colspan="17">Sustainable Development Goals (SDGs)</th>
           </tr>
-          <tr>
+          <tr style="background: aliceblue;">
             <!-- Strategi Start -->
             <td><span data-toggle="tooltip" data-placement="top" title="Strategi Literasi">LIT</span></td>
             <td><span data-toggle="tooltip" data-placement="top" title="Strategi Diseminasi">DIS</span></td>
@@ -232,9 +236,9 @@ $theme = $this->Xin_model->read_theme_info(1);
             <td><span data-toggle="tooltip" data-placement="top" title="Literasi Budaya dan Kewargaan">BK</span></td>
             <!-- 6 Literasi Dasar End -->
             <!-- Inklusivitas Start -->
-            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Down Syndrome">DS</span></td>
-            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Marginal">MR</span></td>
-            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Grand Design">GD</span></td>
+            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Netra">DN</span></td>
+            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Rungu">DR</span></td>
+            <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas Difabilitas Lain">DL</span></td>
             <td><span data-toggle="tooltip" data-placement="top" title="Inklusivitas 3T (Terdepan, Terluar dan Tertinggal)">3T</span></td>
             <!-- Inklusivitas End -->
             <!-- SDGS Start -->
@@ -262,7 +266,7 @@ $theme = $this->Xin_model->read_theme_info(1);
           <?php if ($kegiatan) : ?>
             <?php $no = 1;
             foreach ($kegiatan as $item) : ?>
-              <tr class="<?= ($item['validitas'] === 'invalid') ? 'invalid-kegiatan' : '' ?>">
+              <tr class="<?= ($item['validitas'] === 'invalid') ? 'invalid-kegiatan' : (($item['validitas'] === 'waiting') ? 'waiting-kegiatan' : '') ?>" style="font-size:smaller!important;">
                 <td><?= $no ?></td>
                 <td><input class="checkbox" type="checkbox" name="checklist_kegiatan[]" id="" data-id="<?= $item['id'] ?>"></td>
                 <td><?= $item['kode'] ?></td>
@@ -341,7 +345,7 @@ $theme = $this->Xin_model->read_theme_info(1);
   <div class="card-body">
     <div class="box-datatable table-responsive">
       <table class="datatables-demo table table-striped table-bordered">
-        <thead>
+        <thead style="background: aliceblue;">
           <tr>
             <th rowspan="2">JUMLAH PARTISIPAN</th>
             <th colspan="5">PERAN</th>

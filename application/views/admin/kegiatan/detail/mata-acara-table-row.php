@@ -1,5 +1,5 @@
 <tr>
-  <th colspan="43">
+  <th colspan="4" style="background: ghostwhite;">
     Mata Acara Kegiatan
     <span data-toggle="tooltip" data-placement="top" title="Tambah Mata Acara Kegiatan"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target=".add-modal-mata-acara"><i class="fas fa-plus"></i></button></span>
     <!-- Modal Add Mata Acara -->
@@ -34,7 +34,7 @@
     <form action="<?= base_url() ?>admin/kegiatan/update_mata_acara/<?= $choosed_kegiatan[0]['id'] ?>/<?= $mata_acara['id'] ?>" method="POST" autocomplete="off">
       <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
       <tr>
-        <td colspan="2">
+        <td colspan="4">
           <div class="d-flex flex-with-save">
             <span data-toggle="tooltip" data-placement="top" title="Simpan Baris Mata Acara Kegiatan Ini">
               <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-check"></i></button>
@@ -42,9 +42,9 @@
             <span data-toggle="tooltip" data-placement="top" title="Hapus Baris Mata Acara Kegiatan Ini">
               <a onclick="return confirm('Are you sure you want to delete?');" href="<?= base_url() ?>admin/kegiatan/delete_mata_acara/<?= $choosed_kegiatan[0]['id'] ?>/<?= $mata_acara['id'] ?>" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
             </span>
-            <span data-toggle="tooltip" data-placement="top" title="Tuliskan Mata Acara Kegiatan
+            <span style="width: 100%;" data-toggle="tooltip" data-placement="top" title="Tuliskan Mata Acara Kegiatan
 ">
-              <textarea name="nama_mata_acara" id="nama_mata_acara" rows="2" class="form-control form-table" required><?= $mata_acara['nama_mata_acara'] ?></textarea>
+              <input type="text" style="width: 100%!important;" name="nama_mata_acara" id="nama_mata_acara" rows="2" class="form-control form-table" required value="<?= $mata_acara['nama_mata_acara'] ?>">
             </span>
           </div>
         </td>

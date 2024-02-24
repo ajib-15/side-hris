@@ -16,7 +16,7 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
 <table>
   <!-- Header -->
   <tr>
-    <th colspan="2">DATA UMUM KEGIATAN & LAMPIRAN</th>
+    <th rowspan="2" colspan="4">DATA UMUM KEGIATAN & LAMPIRAN</th>
     <th colspan="3">Strategi</th>
     <th colspan="4">Kelompok Kegiatan</th>
     <th colspan="4">Fokus Kegiatan</th>
@@ -26,67 +26,67 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <th colspan="17">Sustainable Development Goals (SDGs)</th>
   </tr>
   <tr>
+    <!-- Strategi Start -->
+    <th rowspan="3">LIT</span></th>
+    <th rowspan="3">DIS</span></th>
+    <th rowspan="3">INE</span></th>
+    <!-- Strategi End -->
+    <!-- Kelompok Kegiatan Start -->
+    <th rowspan="3">CS</span></th>
+    <th rowspan="3">CR</span></th>
+    <th rowspan="3">CD</span></th>
+    <th rowspan="3">CE</span></th>
+    <!-- Kelompok Kegiatan End -->
+    <!-- Fokus Kegiatan Start -->
+    <th rowspan="3">EDU</span></th>
+    <th rowspan="3">ECO</span></th>
+    <th rowspan="3">HQL</span></th>
+    <th rowspan="3">IE</span></th>
+    <!-- Fokus Kegiatan Start -->
+    <!-- Platform Start -->
+    <th rowspan="3">RG</span></th>
+    <th rowspan="3">DG</span></th>
+    <th rowspan="3">HY</span></th>
+    <!-- Platform End -->
+    <!-- 6 Literasi Dasar Start -->
+    <th rowspan="3">BT</span></th>
+    <th rowspan="3">NU</span></th>
+    <th rowspan="3">SA</span></th>
+    <th rowspan="3">DI</span></th>
+    <th rowspan="3">FI</span></th>
+    <th rowspan="3">BK</span></th>
+    <!-- 6 Literasi Dasar End -->
+    <!-- Inklusivitas Start -->
+    <th rowspan="3">DN</span></th> <!-- DS -->
+    <th rowspan="3">DR</span></th> <!-- MR -->
+    <th rowspan="3">DL</span></th> <!-- GD -->
+    <th rowspan="3">3T</span></th> <!-- 3T -->
+    <!-- Inklusivitas End -->
+    <!-- SDGS Start -->
+    <th rowspan="3">#1</span></th>
+    <th rowspan="3">#2</span></th>
+    <th rowspan="3">#3</span></th>
+    <th rowspan="3">#4</span></th>
+    <th rowspan="3">#5</span></th>
+    <th rowspan="3">#6</span></th>
+    <th rowspan="3">#7</span></th>
+    <th rowspan="3">#8</span></th>
+    <th rowspan="3">#9</span></th>
+    <th rowspan="3">#10</span></th>
+    <th rowspan="3">#11</span></th>
+    <th rowspan="3">#12</span></th>
+    <th rowspan="3">#13</span></th>
+    <th rowspan="3">#14</span></th>
+    <th rowspan="3">#15</span></th>
+    <th rowspan="3">#16</span></th>
+    <th rowspan="3">#17</span></th>
+    <!-- SDGS End -->
+  </tr>
+  <tr>
     <th>Nama Kegiatan</th>
     <td> <!-- nama_kegiatan -->
       <?= $choosed_kegiatan[0]['nama'] ?>
     </td>
-    <!-- Strategi Start -->
-    <th rowspan="2">LIT</span></th>
-    <th rowspan="2">DIS</span></th>
-    <th rowspan="2">INE</span></th>
-    <!-- Strategi End -->
-    <!-- Kelompok Kegiatan Start -->
-    <th rowspan="2">CS</span></th>
-    <th rowspan="2">CR</span></th>
-    <th rowspan="2">CD</span></th>
-    <th rowspan="2">CE</span></th>
-    <!-- Kelompok Kegiatan End -->
-    <!-- Fokus Kegiatan Start -->
-    <th rowspan="2">EDU</span></th>
-    <th rowspan="2">ECO</span></th>
-    <th rowspan="2">HQL</span></th>
-    <th rowspan="2">IE</span></th>
-    <!-- Fokus Kegiatan Start -->
-    <!-- Platform Start -->
-    <th rowspan="2">RG</span></th>
-    <th rowspan="2">DG</span></th>
-    <th rowspan="2">HY</span></th>
-    <!-- Platform End -->
-    <!-- 6 Literasi Dasar Start -->
-    <th rowspan="2">BT</span></th>
-    <th rowspan="2">NU</span></th>
-    <th rowspan="2">SA</span></th>
-    <th rowspan="2">DI</span></th>
-    <th rowspan="2">FI</span></th>
-    <th rowspan="2">BK</span></th>
-    <!-- 6 Literasi Dasar End -->
-    <!-- Inklusivitas Start -->
-    <th rowspan="2">DN</span></th> <!-- DS -->
-    <th rowspan="2">DR</span></th> <!-- MR -->
-    <th rowspan="2">DL</span></th> <!-- GD -->
-    <th rowspan="2">3T</span></th> <!-- 3T -->
-    <!-- Inklusivitas End -->
-    <!-- SDGS Start -->
-    <th rowspan="2">#1</span></th>
-    <th rowspan="2">#2</span></th>
-    <th rowspan="2">#3</span></th>
-    <th rowspan="2">#4</span></th>
-    <th rowspan="2">#5</span></th>
-    <th rowspan="2">#6</span></th>
-    <th rowspan="2">#7</span></th>
-    <th rowspan="2">#8</span></th>
-    <th rowspan="2">#9</span></th>
-    <th rowspan="2">#10</span></th>
-    <th rowspan="2">#11</span></th>
-    <th rowspan="2">#12</span></th>
-    <th rowspan="2">#13</span></th>
-    <th rowspan="2">#14</span></th>
-    <th rowspan="2">#15</span></th>
-    <th rowspan="2">#16</span></th>
-    <th rowspan="2">#17</span></th>
-    <!-- SDGS End -->
-  </tr>
-  <tr>
     <th>
       Sub Heading
     </th>
@@ -98,7 +98,7 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
 
   <!-- Mata Acara -->
   <tr>
-    <th style="text-align: start!important;" colspan="43">
+    <th style="text-align: start!important;" colspan="4">
       Mata Acara Kegiatan
     </th>
   </tr>
@@ -107,7 +107,7 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <?php $no_mata_acara = 1;
     foreach ($kegiatan["mata_acara"] as $mata_acara) : ?>
       <tr>
-        <td colspan="2">
+        <td colspan="4">
           <?= $mata_acara['nama_mata_acara'] ?>
         </td>
         <!-- Strategi Start -->
@@ -166,7 +166,6 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
         <td><?= $mata_acara['sdg_17'] ? '1' : "0" ?></td>
         <!-- SDGS End -->
       </tr>
-      </form>
     <?php $no_mata_acara++;
     endforeach;  ?>
   <?php endif; ?>
@@ -176,14 +175,14 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
   <!-- Tujuan -->
   <!-- Start Looping -->
   <tr>
-    <th style="text-align: start!important;" colspan="43">Tujuan Kegiatan
+    <th style="text-align: start!important;" colspan="45">Tujuan Kegiatan
     </th> <!-- rowspan dinamis -->
   </tr>
   <?php if (count($kegiatan["tujuan"]) > 0) : ?>
     <?php $no_tujuan = 1;
     foreach ($kegiatan["tujuan"] as $tujuan) : ?>
       <tr>
-        <td colspan="43">
+        <td colspan="45">
           <?= $no_tujuan ?>. <?= $tujuan['keterangan'] ?>
         </td>
       </tr>
@@ -196,20 +195,20 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
   <!-- Dokumen -->
   <!-- Start Looping -->
   <tr>
-    <th style="text-align: start!important;">Dokumen & Link File
+    <th colspan="2" style="text-align: start!important;">Dokumen & Link File
     </th> <!-- rowspan dinamis -->
     <th colspan="20" class="text-center">Daftar Dokumen</th>
-    <th>CheckList</th>
+    <th colspan="2">CheckList</th>
     <th colspan="21" class="text-center">Tautan Dokumen Digital</th>
   </tr>
   <?php if (count($kegiatan["dokumen"]) > 0) : ?>
     <?php $no_dokumen = 1;
     foreach ($kegiatan["dokumen"] as $dokumen) : ?>
       <tr>
-        <td colspan="21">
+        <td colspan="22">
           <?= $no_dokumen ?>. <?= $dokumen['keterangan'] ?>
         </td>
-        <td>
+        <td colspan="2">
           <?= $dokumen['flag'] ? 'Sudah Diperiksa' : "Belum Diperiksa" ?>
         </td>
         <td colspan="21">
@@ -229,23 +228,13 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
 
   <tr>
     <!-- Tema -->
-    <th>Tema kegiatan</th>
-    <td colspan="7"><?= $choosed_kegiatan[0]['tema'] ?>
+    <th colspan="2">Tema kegiatan</th>
+    <td colspan="20"><?= $choosed_kegiatan[0]['tema'] ?>
     </td>
     <!-- Tema -->
-    <!-- Penanggung Jawab -->
-    <th>Penanggung Jawab</th>
-    <td colspan="12"><?= $choosed_kegiatan[0]['penanggung_jawab'] ?></td>
-    <!-- Penanggung Jawab -->
-    <!-- Pendamping -->
-    <th>Pendamping</th>
-    <td colspan="12"><?= $choosed_kegiatan[0]['pendamping'] ?></td>
-    </form>
-    <!-- Pendamping -->
     <!-- Lain-Lain -->
-    <th>Lain-Lain</th>
-    <td colspan="8"><?= $choosed_kegiatan[0]['lain_lain'] ?></td>
-    </form>
+    <th colspan="2">Lain-Lain</th>
+    <td colspan="21"><?= $choosed_kegiatan[0]['lain_lain'] ?></td>
     <!-- Lain-Lain -->
   </tr>
   <tr>
@@ -258,15 +247,14 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     </td>
     <!-- Momentum -->
     <!-- Hari-Tgl -->
-    <th rowspan="3">Hari/Tanggal</th>
-    <th colspan="6">3 Huruf Hari</th>
-    <th colspan="6">2 Digit Tanggal</th>
-    <th colspan="6">2 Digit Bulan</th>
-    <th colspan="6">2 Digit Tahun</th>
+    <th rowspan="3" colspan="2">Hari/Tanggal</th>
+    <th rowspan="2" colspan="6">3 Huruf Hari</th>
+    <th rowspan="2" colspan="6">2 Digit Tanggal</th>
+    <th rowspan="2" colspan="6">2 Digit Bulan</th>
+    <th rowspan="2" colspan="6">2 Digit Tahun</th>
     <!-- Hari-Tgl -->
     <!-- Durasi -->
-    <th colspan="5">Jumlah Angka Jam</th>
-    <th colspan="5">Jumlah Angka Menit</th>
+    <th colspan="11">Durasi</th>
     <!-- Durasi -->
   </tr>
   <tr>
@@ -275,29 +263,9 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <td colspan="6">
       <?= $choosed_kegiatan[0]['momentum_bln'] ?>
     </td>
+    <th colspan="6">Jumlah Angka Jam</th>
+    <th colspan="5">Jumlah Angka Menit</th>
     <!-- Momentum -->
-    <!-- Hari-Tgl -->
-    <td colspan="6" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_huruf_hari'] ?>
-    </td>
-    <td colspan="6" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_digit_tanggal'] ?>
-    </td>
-    <td colspan="6" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_digit_bulan'] ?>
-    </td>
-    <td colspan="6" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_digit_tahun'] ?>
-    </td>
-    <!-- Hari-Tgl -->
-    <!-- Durasi -->
-    <td colspan="5" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_digit_jam'] ?>
-    </td>
-    <td colspan="5" rowspan="2">
-      <?= $choosed_kegiatan[0]['ht_digit_menit'] ?>
-    </td>
-    <!-- Durasi -->
   </tr>
   <tr>
     <!-- Momentum -->
@@ -306,6 +274,28 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
       <?= $choosed_kegiatan[0]['momentum_jenis'] ?>
     </td>
     <!-- Momentum -->
+    <!-- Hari-Tgl -->
+    <td colspan="6">
+      <?= $choosed_kegiatan[0]['ht_huruf_hari'] ?>
+    </td>
+    <td colspan="6">
+      <?= $choosed_kegiatan[0]['ht_digit_tanggal'] ?>
+    </td>
+    <td colspan="6">
+      <?= $choosed_kegiatan[0]['ht_digit_bulan'] ?>
+    </td>
+    <td colspan="6">
+      <?= $choosed_kegiatan[0]['ht_digit_tahun'] ?>
+    </td>
+    <!-- Hari-Tgl -->
+    <!-- Durasi -->
+    <td colspan="6">
+      <?= $choosed_kegiatan[0]['ht_digit_jam'] ?>
+    </td>
+    <td colspan="5">
+      <?= $choosed_kegiatan[0]['ht_digit_menit'] ?>
+    </td>
+    <!-- Durasi -->
   </tr>
   <tr>
     <th rowspan="3">Inisiasi</th>
@@ -313,9 +303,9 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <td colspan="6">
       <?= $choosed_kegiatan[0]['inisiasi_rba'] ? 'Ya' : "Tidak" ?>
     </td>
-    <th colspan="21">Lokasi</th>
-    <th colspan="4">Lokasi Jarak</th>
-    <td colspan="10">
+    <th colspan="20">Lokasi</th>
+    <th colspan="6">Lokasi Jarak</th>
+    <td colspan="11">
       <?= $choosed_kegiatan[0]['lokasi_jarak'] ?>
     </td>
   </tr>
@@ -324,10 +314,10 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <td colspan="6">
       <?= $choosed_kegiatan[0]['inisiasi_kolaborator'] ? 'Ya' : "Tidak" ?>
     </td>
-    <th>Lokasi Kegiatan</th>
-    <td colspan="20"><?= $choosed_kegiatan[0]['lokasi_kegiatan'] ?></td>
-    <th colspan="4">Lokasi IH</th>
-    <td colspan="10">
+    <th colspan="2">Lokasi Kegiatan</th>
+    <td colspan="18"><?= $choosed_kegiatan[0]['lokasi_kegiatan'] ?></td>
+    <th colspan="6">Lokasi IH</th>
+    <td colspan="11">
       <?= $choosed_kegiatan[0]['lokasi_ih'] ? 'Ya' : "Tidak" ?>
     </td>
   </tr>
@@ -336,10 +326,10 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <td colspan="6">
       <?= $choosed_kegiatan[0]['inisiasi_mitra'] ? 'Ya' : "Tidak" ?>
     </td>
-    <th>Lokasi Digital</th>
-    <td colspan="20"><?= $choosed_kegiatan[0]['lokasi_digital'] ?></td>
-    <th colspan="4">Lokasi OR</th>
-    <td colspan="10">
+    <th colspan="2">Lokasi Digital</th>
+    <td colspan="18"><?= $choosed_kegiatan[0]['lokasi_digital'] ?></td>
+    <th colspan="6">Lokasi OR</th>
+    <td colspan="11">
       <?= $choosed_kegiatan[0]['lokasi_or'] ? 'Ya' : "Tidak" ?>
     </td>
   </tr>
@@ -348,10 +338,10 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     <th colspan="2">
       Catatan
     </th>
-    <th colspan="11" rowspan="2">Publikasi & Diseminasi</th>
-    <th colspan="10" rowspan="2">Persiapan Kegiatan</th>
-    <th colspan="10" rowspan="2">Pelaksaan Kegiatan</th>
-    <th colspan="10" rowspan="2">Lain-Lain</th>
+    <th colspan="11">Publikasi & Diseminasi</th>
+    <th colspan="11">Persiapan Kegiatan</th>
+    <th colspan="10">Pelaksaan Kegiatan</th>
+    <th colspan="11">Lain-Lain</th>
   </tr>
   <tr>
     <th colspan="2" <?= count($kegiatan["kendala"]) > 0 ? 'rowspan="' . count($kegiatan["kendala"]) + 1 . '"' : '' ?>>Kendala
@@ -362,9 +352,9 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     foreach ($kegiatan["kendala"] as $kendala) : ?>
       <tr>
         <td colspan="11"><?= $no_kendala . ". " . $kendala['publikasi'] ?></td>
-        <td colspan="10"><?= $no_kendala . ". " . $kendala['persiapan'] ?></td>
+        <td colspan="11"><?= $no_kendala . ". " . $kendala['persiapan'] ?></td>
         <td colspan="10"><?= $no_kendala . ". " . $kendala['pelaksanaan'] ?></td>
-        <td colspan="10"><?= $no_kendala . ". " . $kendala['lain_lain'] ?></td>
+        <td colspan="11"><?= $no_kendala . ". " . $kendala['lain_lain'] ?></td>
       </tr>
     <?php $no_kendala++;
     endforeach;  ?>
@@ -378,9 +368,9 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     foreach ($kegiatan["solusi"] as $solusi) : ?>
       <tr>
         <td colspan="11"><?= $no_solusi . ". " . $solusi['publikasi'] ?></td>
-        <td colspan="10"><?= $no_solusi . ". " . $solusi['persiapan'] ?></td>
+        <td colspan="11"><?= $no_solusi . ". " . $solusi['persiapan'] ?></td>
         <td colspan="10"><?= $no_solusi . ". " . $solusi['pelaksanaan'] ?></td>
-        <td colspan="10"><?= $no_solusi . ". " . $solusi['lain_lain'] ?></td>
+        <td colspan="11"><?= $no_solusi . ". " . $solusi['lain_lain'] ?></td>
       </tr>
     <?php $no_solusi++;
     endforeach;  ?>
@@ -394,9 +384,9 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     foreach ($kegiatan["perbaikan"] as $perbaikan) : ?>
       <tr>
         <td colspan="11"><?= $no_perbaikan . ". " . $perbaikan['publikasi'] ?></td>
-        <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['persiapan'] ?></td>
+        <td colspan="11"><?= $no_perbaikan . ". " . $perbaikan['persiapan'] ?></td>
         <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['pelaksanaan'] ?></td>
-        <td colspan="10"><?= $no_perbaikan . ". " . $perbaikan['lain_lain'] ?></td>
+        <td colspan="11"><?= $no_perbaikan . ". " . $perbaikan['lain_lain'] ?></td>
       </tr>
     <?php $no_perbaikan++;
     endforeach;  ?>
@@ -404,15 +394,15 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
 
   <!-- Kolaborator -->
   <tr>
-    <th colspan="43">Kolaborator dan/atau Mitra
+    <th colspan="45">Kolaborator dan/atau Mitra
     </th> <!-- rowspan dinamis -->
   </tr>
   <tr>
     <th colspan="21">Nama Kolaborator dan/atau Mitra</th>
     <th colspan="5">Sektor Pertama</th>
     <th colspan="5">Sektor Kedua</th>
-    <th colspan="4">Sektor Ketiga</th>
-    <th colspan="4">New</th>
+    <th colspan="5">Sektor Ketiga</th>
+    <th colspan="5">New</th>
     <th colspan="4">MoU</th>
   </tr>
 
@@ -427,10 +417,10 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
         <td colspan="5">
           <?= $kolaborator['sektor_dua'] ? 'Ya' : "Tidak" ?>
         </td>
-        <td colspan="4">
+        <td colspan="5">
           <?= $kolaborator['sektor_tiga'] ? 'Ya' : "Tidak" ?>
         </td>
-        <td colspan="4">
+        <td colspan="5">
           <?= $kolaborator['mitra_baru'] ? 'Ya' : "Tidak" ?>
         </td>
         <td colspan="4">
@@ -444,27 +434,27 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
 
   <!-- Partisipan -->
   <tr>
-    <th rowspan="5">Partisipan
+    <th rowspan="4">Partisipan
     </th>
-    <th colspan="4">Total</th>
+    <th colspan="6">Total</th>
     <th colspan="5">Kategori Peserta</th>
     <th colspan="5">Kategori Penampil</th>
-    <th colspan="5">Kategori Fasilitator</th>
+    <th colspan="4">Kategori Fasilitator</th>
     <th colspan="6">Kategori Narasumber</th>
     <th colspan="6">Kategori Panitia</th>
     <th colspan="6">Kategori Laki Laki</th>
     <th colspan="6">Kategori Perempuan</th>
   </tr>
   <tr>
-    <td rowspan="4"><?= $choosed_kegiatan[0]['partisipan_total_huruf'] ?>
+    <td rowspan="3" colspan="2"><?= $choosed_kegiatan[0]['partisipan_total_huruf'] ?>
     </td>
-    <td rowspan="4" colspan="3"><?= $choosed_kegiatan[0]['partisipan_total_digit'] ?>
+    <td rowspan="3" colspan="4"><?= $choosed_kegiatan[0]['partisipan_total_digit'] ?>
     </td>
     <td colspan="5"><?= $choosed_kegiatan[0]['partisipan_peserta'] ?>
     </td>
     <td colspan="5"><?= $choosed_kegiatan[0]['partisipan_penampil'] ?>
     </td>
-    <td colspan="5"><?= $choosed_kegiatan[0]['partisipan_fasilitator'] ?>
+    <td colspan="4"><?= $choosed_kegiatan[0]['partisipan_fasilitator'] ?>
     </td>
     <td colspan="6"><?= $choosed_kegiatan[0]['partisipan_narasumber'] ?>
     </td>
@@ -478,7 +468,7 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
   <tr>
     <th colspan="5">Usia 00 - 06</th>
     <th colspan="5">Usia 07 - 12</th>
-    <th colspan="5">Usia 13 - 17</th>
+    <th colspan="4">Usia 13 - 17</th>
     <th colspan="6">Usia 18 - 30</th>
     <th colspan="6">Usia 31 - 40</th>
     <th colspan="6">Usia 41 - 60</th>
@@ -489,7 +479,7 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     </td>
     <td colspan="5"><?= $choosed_kegiatan[0]['partisipan_7_12'] ?>
     </td>
-    <td colspan="5"><?= $choosed_kegiatan[0]['partisipan_13_17'] ?>
+    <td colspan="4"><?= $choosed_kegiatan[0]['partisipan_13_17'] ?>
     </td>
     <td colspan="6"><?= $choosed_kegiatan[0]['partisipan_18_30'] ?>
     </td>
@@ -501,6 +491,17 @@ header("Content-Disposition: attachment; filename=Laporan Kegiatan.xls");
     </td>
   </tr>
   <!-- Partisipan -->
+  <tr>
+    <!-- Penanggung Jawab -->
+    <th colspan="3">Penanggung Jawab</th>
+    <td colspan="14"><?= $choosed_kegiatan[0]['penanggung_jawab'] ?></td>
+    <!-- Penanggung Jawab -->
+    <!-- Pendamping -->
+    <th colspan="2">Pendamping</th>
+    <td colspan="26"><?= $choosed_kegiatan[0]['pendamping'] ?></td>
+    </form>
+    <!-- Pendamping -->
+  </tr>
 </table>
 <br>
 <table>
